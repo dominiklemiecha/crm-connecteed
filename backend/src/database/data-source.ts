@@ -1,0 +1,17 @@
+import { DataSource } from 'typeorm';
+import * as dotenv from 'dotenv';
+import * as path from 'path';
+
+dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
+
+export default new DataSource({
+  type: 'postgres',
+  host: process.env.DB_HOST || 'localhost',
+  port: parseInt(process.env.DB_PORT || '5432', 10),
+  username: process.env.DB_USERNAME || 'connecteed',
+  password: process.env.DB_PASSWORD || 'connecteed_secret',
+  database: process.env.DB_DATABASE || 'crm_connecteed',
+  entities: [path.resolve(__dirname, '../**/*.entity{.ts,.js}')],
+  migrations: [path.resolve(__dirname, './migrations/*{.ts,.js}')],
+  synchronize: false,
+});

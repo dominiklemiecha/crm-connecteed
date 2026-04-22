@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRM Connecteed — Demo Flusso Operativo</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.7; }
+
+  .hero { text-align: center; padding: 80px 40px 60px; }
+  .hero img { height: 40px; margin-bottom: 24px; }
+  .hero h1 { font-size: 2.8rem; font-weight: 800; color: white; margin-bottom: 12px; }
+  .hero p { font-size: 1.15rem; color: #94a3b8; max-width: 600px; margin: 0 auto; }
+
+  .timeline { max-width: 780px; margin: 0 auto; padding: 0 24px 80px; position: relative; }
+  .timeline::before { content: ''; position: absolute; left: 39px; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, #3b82f6, #8b5cf6, #22c55e, #f59e0b, #06b6d4, #ec4899, #10b981); border-radius: 3px; }
+
+  .step { position: relative; padding-left: 90px; margin-bottom: 48px; }
+  .step-dot { position: absolute; left: 26px; top: 4px; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.75rem; color: white; z-index: 2; box-shadow: 0 0 0 4px #0f172a; }
+  .step-connector { position: absolute; left: 56px; top: 14px; width: 24px; height: 2px; background: #334155; }
+
+  .step-card { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 28px; transition: transform 0.2s, box-shadow 0.2s; }
+  .step-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+
+  .step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+  .step-header h2 { font-size: 1.15rem; font-weight: 700; color: white; flex: 1; }
+  .actor { font-size: 0.7rem; padding: 4px 12px; border-radius: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+  .actor-azienda { background: #312e81; color: #a5b4fc; }
+  .actor-commerciale { background: #581c87; color: #d8b4fe; }
+  .actor-ceo { background: #78350f; color: #fcd34d; }
+  .actor-cliente { background: #0c4a6e; color: #7dd3fc; }
+  .actor-pm { background: #064e3b; color: #6ee7b7; }
+  .actor-support { background: #831843; color: #f9a8d4; }
+  .actor-admin { background: #1e3a5f; color: #93c5fd; }
+  .actor-sistema { background: #374151; color: #d1d5db; }
+
+  .step-body { color: #94a3b8; font-size: 0.92rem; }
+  .step-body p { margin-bottom: 10px; }
+  .step-body strong { color: #e2e8f0; }
+  .step-body ul { padding-left: 20px; margin: 8px 0; }
+  .step-body li { margin-bottom: 4px; }
+
+  .action-box { border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 0.85rem; }
+  .action-user { background: #1e3a5f; border-left: 3px solid #3b82f6; color: #93c5fd; }
+  .action-auto { background: #1a2e1a; border-left: 3px solid #22c55e; color: #86efac; }
+  .action-portal { background: #1e2a3a; border-left: 3px solid #06b6d4; color: #67e8f9; }
+  .action-result { background: #2d1f0e; border-left: 3px solid #f59e0b; color: #fcd34d; }
+
+  .action-box .label { font-weight: 700; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; margin-bottom: 4px; }
+
+  .divider { text-align: center; padding: 20px 0; position: relative; margin-left: 90px; }
+  .divider span { background: #0f172a; padding: 0 16px; color: #475569; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; position: relative; z-index: 1; }
+
+  .data-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.82rem; border-radius: 8px; overflow: hidden; }
+  .data-table th { padding: 8px 12px; text-align: left; background: #334155; color: #94a3b8; font-weight: 600; }
+  .data-table td { padding: 8px 12px; border-bottom: 1px solid #2d3748; color: #cbd5e1; }
+
+  .footer { text-align: center; padding: 40px; color: #475569; font-size: 0.8rem; border-top: 1px solid #1e293b; }
+
+  .bg-blue { background: #3b82f6; }
+  .bg-purple { background: #8b5cf6; }
+  .bg-green { background: #22c55e; }
+  .bg-orange { background: #f97316; }
+  .bg-teal { background: #14b8a6; }
+  .bg-cyan { background: #06b6d4; }
+  .bg-pink { background: #ec4899; }
+  .bg-amber { background: #f59e0b; }
+  .bg-emerald { background: #10b981; }
+  .bg-red { background: #ef4444; }
+  .bg-indigo { background: #6366f1; }
+  .bg-sky { background: #0ea5e9; }
+  .bg-rose { background: #f43f5e; }
+  .bg-slate { background: #64748b; }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 1.8rem; }
+    .step { padding-left: 70px; }
+    .timeline::before { left: 29px; }
+    .step-dot { left: 16px; }
+    .step-connector { left: 46px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Il Flusso Operativo</h1>
+  <p>Dalla prima chiamata del cliente fino alla consegna del progetto — ogni passaggio gestito in un unico sistema.</p>
+</div>
+<div class="timeline">
+<div class="step">
+  <div class="step-dot bg-blue">1</div>
+  <div class="step-connector"></div>
+  <div class="step-card">
+    <div class="step-header">
+      <h2>Arriva un nuovo cliente</h2>
+      <span class="actor actor-commerciale">Commerciale</span>
+    </div>
+    <div class="step-body">
+      <p>Il commerciale riceve una richiesta da un potenziale cliente. Registra l'azienda nel CRM con tutti i dati fiscali e il contatto di riferimento.</p>
+      <div class="action-user">
+        <div class="label">Il commerciale fa</div>
+        Crea l'azienda <strong>"TechStore Italia Srl"</strong> con P.IVA, indirizzo, email. Aggiunge <strong>Giuseppe Ferraro</strong> come contatto principale e crea le sue credenziali per il portale cliente.
+      </div>
+      <div class="action-result">
+        <div class="label">Risultato</div>
+        L'azienda ha una scheda completa con vista 360°: contatti, opportunità, ticket, fatture — tutto in un posto.
+      </div>
+    </div>
+  </div>
+</div>
+<div class="step">
+  <div class="step-dot bg-purple">2</div>
+  <div class="step-connector"></div>
+  <div class="step-card">
+    <div class="step-header">
+      <h2>Nasce il Lead</h2>
+      <span class="actor actor-commerciale">Commerciale</span>
+    </div>
+    <div class="step-body">
+      <p>Il commerciale crea un lead associando obbligatoriamente un prodotto/servizio dal catalogo aziendale.</p>
+      <div class="action-user">
+        <div class="label">Il commerciale fa</div>
+        Crea un lead per <strong>E-commerce TechStore</strong>: prodotto "Piattaforma E-commerce", valore stimato 120.000€, probabilità 70%, fonte "Referral".
+      </div>
+      <p>Il lead appare nella <strong>pipeline</strong> con i KPI aggregati per stato. Il commerciale lo qualifica e lo converte in opportunità con un click.</p>
+      <div class="action-auto">
+        <div class="label">Il sistema fa</div>
+        Crea automaticamente l'opportunità con tutti i dati del lead. Il lead passa a "Qualificato".
+      </div>
+    </div>
+  </div>
+</div>
+<div class="step">
+  <div class="step-dot bg-indigo">3</div>
+  <div class="step-connector"></div>
+  <div class="step-card">
+    <div class="step-header">
+      <h2>Pre-vendita e analisi</h2>
+      <span class="actor actor-commerciale">Commerciale</span>
+      <span class="actor actor-azienda">Team</span>
+    </div>
+    <div class="step-body">
+      <p>L'opportunità avanza nella pipeline attraverso 11 stadi: Scoping → Pre-vendita → Preventivo → CEO → Invio → Negoziazione → Accettazione → Contratto → Pagamento → Vinto.</p>
+      <div class="action-user">
+        <div class="label">Il commerciale fa</div>
+        Avanza l'opportunità a <strong>"Pre-vendita"</strong> e apre ticket interni ai reparti (Development, Design) per raccogliere stime di fattibilità e costi.
+      </div>
+      <p>Ogni reparto risponde nel thread del ticket con stime, rischi e note. Le note interne restano invisibili al cliente.</p>
+    </div>
+  </div>
+</div>
+<div class="step">
+  <div class="step-dot bg-teal">4</div>
+  <div class="step-connector"></div>
+  <div class="step-card">
+    <div class="step-header">
+      <h2>Creazione del preventivo</h2>
+      <span class="actor actor-commerciale">Commerciale</span>
+    </div>
+    <div class="step-body">
+      <p>Il commerciale compone il preventivo inserendo le voci di costo con tipologia Fixed o T&M (Time & Material).</p>
+      <table class="data-table">
+        <tr><th>Voce</th><th>Tipo</th><th>Importo</th></tr>
+        <tr><td>Analisi e Design UX/UI</td><td>Fixed</td><td>€ 20.000</td></tr>
+        <tr><td>Sviluppo Backend API</td><td>Fixed</td><td>€ 35.000</td></tr>
+        <tr><td>Sviluppo Frontend React</td><td>Fixed</td><td>€ 30.000</td></tr>
+        <tr><td>Migrazione dati</td><td>Fixed</td><td>€ 15.000</td></tr>
+        <tr><td>Testing e Deploy</td><td>Fixed</td><td>€ 10.000</td></tr>
+        <tr><td>Formazione (a giornata)</td><td>T&M</td><td>€ 1.500 × 10</td></tr>
+      </table>
+      <div class="action-result">
+        <div class="label">Totale calcolato automaticamente</div>
+        <strong>€ 125.000</strong> — Il preventivo supporta versioning (v1, v2, v3...) per gestire le revisioni.
+      </div>
+    </div>
+  </div>
+</div>
+<div class="step">
+  <div class="step-dot bg-amber">5</div>
+  <div class="step-connector"></div>
+  <div class="step-card">
+    <div class="step-header">
+      <h2>Approvazione del CEO</h2>
+      <span class="actor actor-ceo">CEO</span>
+    </div>
+    <div class="step-body">
+      <p>Il commerciale invia il preventivo al CEO per approvazione. Il CEO ha una <strong>coda approvazioni unificata</strong> per preventivi, contratti e change request.</p>
+      <div class="action-auto">
+        <div class="label">Il sistema fa</div>
+        Quando il preventivo va in "Attesa CEO", viene creata automaticamente una richiesta di approvazione.
+      </div>
+      <div class="action-user">
+        <div class="label">Il CEO fa</div>
+        Dalla pagina <strong>Approvazioni</strong>, rivede il preventivo e clicca <strong>Approva</strong> (oppure Rifiuta con note obbligatorie).
+      </div>
+      <div class="action-auto">
+        <div class="label">Il sistema fa</div>
+        Il preventivo passa a "Approvato". Il commerciale riceve una notifica. Ora può generare il documento dal template personalizzabile e inviarlo al cliente.
+      </div>
+    </div>
+  </div>
+</div>
+<div class="step">
+  <div class="step-dot bg-cyan">6</div>
+  <div class="step-connector"></div>
+  <div class="step-card">
+    <div class="step-header">
+      <h2>Il documento arriva al cliente</h2>
+      <span class="actor actor-commerciale">Commerciale</span>
+      <span class="actor actor-cliente">Cliente</span>
+    </div>
+    <div class="step-body">
+      <div class="action-user">
+        <div class="label">Il commerciale fa</div>
+        Clicca <strong>"Genera Documento"</strong> — il sistema compila automaticamente il template con i dati del cliente (nome azienda, P.IVA, voci, totale). Poi clicca <strong>"Invia al Cliente"</strong>.
+      </div>
+      <div class="action-portal">
+        <div class="label">Nel portale cliente</div>
+        Giuseppe Ferraro accede al <strong>Portale Cliente</strong> con le sue credenziali. Nella dashboard vede: <strong>"Preventivi in Attesa: 1"</strong>. Apre il preventivo, vede tutte le voci e il totale, e può scaricare il PDF.
+      </div>
+    </div>
+  </div>
+</div>
+<div class="step">
+  <div class="step-dot bg-green">7</div>
+  <div class="step-connector"></div>
+  <div class="step-card">
+    <div class="step-header">
+      <h2>Il cliente accetta</h2>
+      <span class="actor actor-cliente">Cliente</span>
+      <span class="actor actor-sistema">Sistema</span>
+    </div>
+    <div class="step-body">
+      <div class="action-portal">
+        <div class="label">Il cliente fa</div>
+        Dal portale, clicca <strong>"Accetta Preventivo"</strong>. (Oppure "Rifiuta" con motivo obbligatorio.)
+      </div>
+      <div class="action-auto">
+        <div class="label">Il sistema fa — 2 automazioni</div>
+        <ul>
+          <li>L'opportunità passa automaticamente a <strong>"Accettato"</strong></li>
+          <li>Viene creato automaticamente un <strong>Contratto</strong> in bozza, collegato al preventivo</li>
+        </ul>
+      </div>
+      <p style="margin-top:8px">Se il cliente rifiuta, l'opportunità va in "Perso" con il motivo registrato.</p>
+    </div>
+  </div>
+</div>
+<div class="step">
+  <div class="step-dot bg-emerald">8</div>
+  <div class="step-connector"></div>
+  <div class="step-card">
+    <div class="step-header">
+      <h2>Firma del contratto</h2>
+      <span class="actor actor-commerciale">Commerciale</span>
+      <span class="actor actor-ceo">CEO</span>
+    </div>
+    <div class="step-body">
+      <p>Il contratto segue il suo workflow: Bozza → Approvazione CEO → Pronto per firma → In firma → Firmato.</p>
+      <div class="action-user">
+        <div class="label">Il commerciale fa</div>
+        Invia il contratto al CEO per approvazione. Dopo l'approvazione, genera il documento contrattuale dal template, aggiunge i firmatari e avanza alla firma.
+      </div>
+      <div class="action-auto">
+        <div class="label">Dopo la firma — Il sistema fa</div>
+        <ul>
+          <li>Crea automaticamente una <strong>fattura proforma</strong> con tutte le voci del preventivo</li>
+          <li>Il totale viene calcolato automaticamente</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="step">
+  <div class="step-dot bg-amber">9</div>
+  <div class="step-connector"></div>
+  <div class="step-card">
+    <div class="step-header">
+      <h2>Pagamento e avvio progetto</h2>
+      <span class="actor actor-admin">Amministrazione</span>
+      <span class="actor actor-sistema">Sistema</span>
+    </div>
+    <div class="step-body">
+      <p>L'amministrazione registra il pagamento ricevuto dal cliente.</p>
+      <div class="action-user">
+        <div class="label">L'amministrazione fa</div>
+        Registra il pagamento: importo, metodo (bonifico), riferimento CRO, data.
+      </div>
+      <div class="action-auto" style="border-left-color: #f59e0b; background: #2d2210;">
+        <div class="label" style="color: #fbbf24;">⚡ GATE — 3 automazioni scattano</div>
+        <ul style="color: #fde68a;">
+          <li>La fattura passa a <strong>"Pagata"</strong></li>
+          <li>Viene creato automaticamente il <strong>Progetto</strong></li>
+          <li>L'opportunità passa a <strong>"Vinto"</strong></li>
+        </ul>
+      </div>
+      <p><em>Il progetto non può partire senza il pagamento. Questa è la regola cardine del sistema.</em></p>
+    </div>
+  </div>
+</div>
+<div class="step">
+  <div class="step-dot bg-sky">10</div>
+  <div class="step-connector"></div>
+  <div class="step-card">
+    <div class="step-header">
+      <h2>Gestione del progetto</h2>
+      <span class="actor actor-pm">PM</span>
+      <span class="actor actor-azienda">Team</span>
+    </div>
+    <div class="step-body">
+      <p>Il PM organizza il lavoro con il <strong>Gantt chart</strong> visuale: task, milestone, assegnazioni per utente e reparto, date pianificate.</p>
+      <table class="data-table">
+        <tr><th>Task</th><th>Team</th><th>Assegnato a</th></tr>
+        <tr><td>Kickoff Meeting</td><td>PM</td><td>Laura Bianchi</td></tr>
+        <tr><td>Analisi Requisiti</td><td>Development</td><td>Andrea Verdi</td></tr>
+        <tr><td>Design UX/UI</td><td>Design</td><td>Sara Neri</td></tr>
+        <tr><td>Sviluppo Backend + Frontend</td><td>Development</td><td>Andrea Verdi</td></tr>
+        <tr><td>Testing & Go-Live</td><td>QA / PM</td><td>Laura Bianchi</td></tr>
+      </table>
+      <p>Ogni membro del team registra le <strong>ore lavorate</strong> per task. Il PM vede il confronto tra ore stimate e ore reali.</p>
+    </div>
+  </div>
+</div>
+<div class="step">
+  <div class="step-dot bg-cyan">11</div>
+  <div class="step-connector"></div>
+  <div class="step-card">
+    <div class="step-header">
+      <h2>Il cliente segue il progetto</h2>
+      <span class="actor actor-cliente">Cliente</span>
+    </div>
+    <div class="step-body">
+      <p>Dal <strong>Portale Cliente</strong>, il cliente ha visibilità completa:</p>
+      <ul>
+        <li>Vede i <strong>progetti</strong> con avanzamento % e lista task/milestone</li>
+        <li>Vede i <strong>documenti</strong> condivisi dal team</li>
+        <li>Può aprire <strong>ticket di supporto</strong> in qualsiasi momento</li>
+        <li>Può scaricare il <strong>PDF del preventivo</strong></li>
+      </ul>
+      <div class="action-portal">
+        <div class="label">Il cliente fa</div>
+        Apre un ticket: "Quando sarà pronta la migrazione dati?"
+      </div>
+      <div class="action-auto">
+        <div class="label">Il sistema fa</div>
+        Il ticket arriva nella coda <strong>Support</strong> interna, con badge "Portale". Il team risponde e il cliente vede la risposta nel suo portale.
+      </div>
+    </div>
+  </div>
+</div>
+<div class="step">
+  <div class="step-dot bg-pink">12</div>
+  <div class="step-connector"></div>
+  <div class="step-card">
+    <div class="step-header">
+      <h2>Supporto e comunicazione</h2>
+      <span class="actor actor-support">Support</span>
+      <span class="actor actor-cliente">Cliente</span>
+    </div>
+    <div class="step-body">
+      <p>Il sistema di ticketing con <strong>SLA</strong> gestisce ogni richiesta:</p>
+      <ul>
+        <li><strong>4 classi SLA</strong>: Pre-vendita, Delivery, Supporto, Amministrazione</li>
+        <li><strong>Escalation automatica</strong>: se il tempo di risposta scade, il sistema crea un ticket di escalation e notifica il responsabile</li>
+        <li><strong>Note interne</strong>: il team può discutere senza che il cliente veda</li>
+        <li><strong>Thread completo</strong>: ogni ticket ha lo storico di tutta la conversazione</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="step">
+  <div class="step-dot bg-rose">13</div>
+  <div class="step-connector"></div>
+  <div class="step-card">
+    <div class="step-header">
+      <h2>Analisi e decisioni</h2>
+      <span class="actor actor-ceo">CEO</span>
+    </div>
+    <div class="step-body">
+      <p>La <strong>Dashboard</strong> mostra in tempo reale: lead attivi, opportunità, ticket aperti, preventivi in attesa, progetti attivi, fatture scadute, valore pipeline.</p>
+      <p>I <strong>Report</strong> offrono analisi approfondite con grafici:</p>
+      <ul>
+        <li><strong>Vendite</strong>: conversioni, valore chiuso, motivi persi, tempo medio chiusura</li>
+        <li><strong>Pipeline</strong>: opportunità per stato, forecast</li>
+        <li><strong>Delivery</strong>: progetti per stato, ritardi, on-time rate</li>
+        <li><strong>Supporto</strong>: ticket per priorità, tempo medio risoluzione, SLA breach</li>
+        <li><strong>Finanziario</strong>: revenue, overdue, collection rate</li>
+      </ul>
+      <p>Tutti i report sono esportabili in <strong>CSV</strong>.</p>
+    </div>
+  </div>
+</div>
+<div class="step">
+  <div class="step-dot bg-slate">14</div>
+  <div class="step-connector"></div>
+  <div class="step-card">
+    <div class="step-header">
+      <h2>Documenti personalizzabili</h2>
+      <span class="actor actor-admin">Admin</span>
+    </div>
+    <div class="step-body">
+      <p>I <strong>template documenti</strong> per preventivi e contratti sono completamente personalizzabili con un editor visuale.</p>
+      <ul>
+        <li>Scrivi il documento come in Word</li>
+        <li>Inserisci <strong>variabili automatiche</strong> con un click: nome azienda, P.IVA, voci del preventivo, totale, firmatari</li>
+        <li>Quando generi il documento, i dati del cliente vengono compilati automaticamente</li>
+        <li>Ogni azienda può avere template diversi per preventivi e contratti</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="step">
+  <div class="step-dot bg-indigo">15</div>
+  <div class="step-connector"></div>
+  <div class="step-card">
+    <div class="step-header">
+      <h2>Tracciabilità completa</h2>
+      <span class="actor actor-sistema">Sistema</span>
+    </div>
+    <div class="step-body">
+      <p>Ogni azione nel sistema viene registrata nel <strong>Registro Attività</strong>: chi ha fatto cosa, quando, su quale entità.</p>
+      <p>Cambio stato lead, approvazione CEO, upload file, modifica preventivo, pagamento registrato — tutto è tracciabile e consultabile.</p>
+      <p>Il sistema è <strong>multi-tenant</strong>: ogni organizzazione ha i propri dati completamente isolati.</p>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

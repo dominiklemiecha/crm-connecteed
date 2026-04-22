@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRM Connecteed — Guida Flusso Operativo</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; background: #f1f5f9; color: #1e293b; line-height: 1.6; }
+
+  .header { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%); color: white; padding: 60px 40px; text-align: center; }
+  .header h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 8px; }
+  .header p { font-size: 1.1rem; opacity: 0.7; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+
+  .prerequisites { background: white; border-radius: 16px; padding: 32px; margin-bottom: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .prerequisites h2 { font-size: 1.3rem; color: #0f172a; margin-bottom: 16px; }
+  .prerequisites table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+  .prerequisites th, .prerequisites td { padding: 10px 16px; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem; }
+  .prerequisites th { background: #f8fafc; font-weight: 600; color: #475569; }
+  .prerequisites code { background: #f1f5f9; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; color: #7c3aed; }
+
+  .phase { background: white; border-radius: 16px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .phase-header { padding: 20px 28px; cursor: pointer; display: flex; align-items: center; gap: 16px; border-bottom: 1px solid #f1f5f9; }
+  .phase-header:hover { background: #f8fafc; }
+  .phase-number { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; color: white; flex-shrink: 0; }
+  .phase-header h2 { font-size: 1.15rem; font-weight: 700; color: #0f172a; flex: 1; }
+  .phase-header .role { font-size: 0.75rem; padding: 4px 12px; border-radius: 20px; font-weight: 600; }
+  .phase-header .arrow { transition: transform 0.2s; font-size: 1.2rem; color: #94a3b8; }
+  .phase.open .arrow { transform: rotate(90deg); }
+  .phase-body { padding: 0 28px 28px; display: none; }
+  .phase.open .phase-body { display: block; }
+
+  .step { margin-top: 24px; }
+  .step h3 { font-size: 1rem; font-weight: 700; color: #334155; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+  .step ol, .step ul { padding-left: 24px; margin-bottom: 12px; }
+  .step li { margin-bottom: 8px; font-size: 0.9rem; color: #475569; }
+  .step li strong { color: #0f172a; }
+
+  .verify { background: #f0fdf4; border-left: 4px solid #22c55e; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 0.85rem; color: #166534; }
+  .verify::before { content: '✓ '; font-weight: 800; }
+
+  .warning { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 0.85rem; color: #92400e; }
+  .warning::before { content: '⚠ '; }
+
+  .auto { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 0.85rem; color: #1e40af; }
+  .auto::before { content: '⚡ '; font-weight: 800; }
+
+  .data-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+  .data-table th, .data-table td { padding: 8px 12px; text-align: left; border: 1px solid #e2e8f0; }
+  .data-table th { background: #f8fafc; font-weight: 600; color: #475569; }
+  .data-table td { color: #334155; }
+
+  .checklist { background: white; border-radius: 16px; padding: 32px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .checklist h2 { font-size: 1.3rem; margin-bottom: 20px; color: #0f172a; }
+  .checklist h3 { font-size: 1rem; font-weight: 700; color: #475569; margin: 20px 0 12px; }
+  .checklist label { display: flex; align-items: flex-start; gap: 10px; padding: 6px 0; font-size: 0.9rem; color: #334155; cursor: pointer; }
+  .checklist input[type="checkbox"] { margin-top: 3px; accent-color: #22c55e; width: 16px; height: 16px; }
+
+  .automations { background: white; border-radius: 16px; padding: 32px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .automations h2 { font-size: 1.3rem; margin-bottom: 16px; color: #0f172a; }
+  .auto-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-size: 0.85rem; }
+  .auto-row:last-child { border-bottom: none; }
+  .auto-trigger { background: #f1f5f9; padding: 4px 12px; border-radius: 6px; font-weight: 600; color: #475569; white-space: nowrap; }
+  .auto-arrow { color: #94a3b8; font-weight: 800; }
+  .auto-action { color: #059669; font-weight: 600; }
+
+  .bg-blue { background: #3b82f6; }
+  .bg-purple { background: #8b5cf6; }
+  .bg-green { background: #22c55e; }
+  .bg-orange { background: #f97316; }
+  .bg-teal { background: #14b8a6; }
+  .bg-red { background: #ef4444; }
+  .bg-indigo { background: #6366f1; }
+  .bg-amber { background: #f59e0b; }
+  .bg-cyan { background: #06b6d4; }
+  .bg-emerald { background: #10b981; }
+  .bg-pink { background: #ec4899; }
+  .bg-slate { background: #64748b; }
+  .bg-rose { background: #f43f5e; }
+  .bg-sky { background: #0ea5e9; }
+
+  .role-admin { background: #dbeafe; color: #1e40af; }
+  .role-commerciale { background: #ede9fe; color: #5b21b6; }
+  .role-ceo { background: #fef3c7; color: #92400e; }
+  .role-pm { background: #d1fae5; color: #065f46; }
+  .role-support { background: #ffe4e6; color: #9f1239; }
+  .role-cliente { background: #e0f2fe; color: #0369a1; }
+
+  @media print {
+    .phase-body { display: block !important; }
+    .header { padding: 20px; }
+    .phase-header .arrow { display: none; }
+    body { background: white; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>CRM Connecteed</h1>
+  <p>Guida Step-by-Step — Flusso Operativo Quotidiano</p>
+</div>
+
+<div class="container">
+
+<!-- Prerequisiti -->
+<div class="prerequisites">
+  <h2>🔧 Prerequisiti</h2>
+  <table>
+    <tr><th>Servizio</th><th>URL</th></tr>
+    <tr><td>Frontend</td><td><a href="http://localhost:5173">http://localhost:5173</a></td></tr>
+    <tr><td>Portale Cliente</td><td><a href="http://localhost:5173/portal/login">http://localhost:5173/portal/login</a></td></tr>
+    <tr><td>Backend API</td><td>http://localhost:3000</td></tr>
+  </table>
+  <p style="margin-top:12px"><strong>Credenziali:</strong> <code>admin@connecteed.com</code> / <code>Admin123!@#</code></p>
+</div>
+
+<!-- FASE 1 -->
+<div class="phase open" onclick="this.classList.toggle('open')">
+  <div class="phase-header">
+    <div class="phase-number bg-blue">1</div>
+    <h2>Setup Iniziale</h2>
+    <span class="role role-admin">Admin</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="phase-body">
+    <div class="step">
+      <h3>1.1 — Login</h3>
+      <ol>
+        <li>Apri <a href="http://localhost:5173/login">http://localhost:5173/login</a></li>
+        <li>Inserisci <strong>Email</strong> e <strong>Password</strong></li>
+        <li>Clicca <strong>Accedi</strong></li>
+      </ol>
+      <div class="verify">Arrivi sulla Dashboard con i KPI a 0</div>
+    </div>
+    <div class="step">
+      <h3>1.2 — Crea i Reparti</h3>
+      <ol>
+        <li>Sidebar → <strong>Reparti</strong></li>
+        <li>Clicca <strong>Nuovo Reparto</strong> e crea: Development, Design, Project Management, Support, Amministrazione</li>
+      </ol>
+      <div class="verify">5 reparti nella lista</div>
+    </div>
+    <div class="step">
+      <h3>1.3 — Catalogo Prodotti</h3>
+      <ol>
+        <li>Sidebar → <strong>Prodotti</strong> → <strong>+ Nuovo Prodotto</strong></li>
+      </ol>
+      <table class="data-table">
+        <tr><th>Codice</th><th>Nome</th><th>Categoria</th></tr>
+        <tr><td>WEB-APP</td><td>Sviluppo Web Application</td><td>Development</td></tr>
+        <tr><td>MOBILE-APP</td><td>App Mobile</td><td>Development</td></tr>
+        <tr><td>E-COMMERCE</td><td>Piattaforma E-commerce</td><td>Development</td></tr>
+        <tr><td>CONSULTING</td><td>Consulenza IT</td><td>Servizi</td></tr>
+      </table>
+    </div>
+    <div class="step">
+      <h3>1.4 — Crea il Team</h3>
+      <ol><li>Sidebar → <strong>Utenti</strong> → <strong>+ Nuovo Utente</strong></li></ol>
+      <table class="data-table">
+        <tr><th>Nome</th><th>Email</th><th>Ruolo</th><th>Password</th></tr>
+        <tr><td>Marco Rossi</td><td>marco@connecteed.com</td><td>Commerciale</td><td>Team123!@#</td></tr>
+        <tr><td>Laura Bianchi</td><td>laura@connecteed.com</td><td>PM</td><td>Team123!@#</td></tr>
+        <tr><td>Andrea Verdi</td><td>andrea@connecteed.com</td><td>Dev</td><td>Team123!@#</td></tr>
+        <tr><td>Sara Neri</td><td>sara@connecteed.com</td><td>Design</td><td>Team123!@#</td></tr>
+        <tr><td>Paolo Gialli</td><td>paolo@connecteed.com</td><td>Support</td><td>Team123!@#</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- FASE 2 -->
+<div class="phase" onclick="this.classList.toggle('open')">
+  <div class="phase-header">
+    <div class="phase-number bg-purple">2</div>
+    <h2>Acquisizione Cliente</h2>
+    <span class="role role-commerciale">Commerciale</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="phase-body">
+    <div class="step">
+      <h3>2.1 — Registra l'Azienda</h3>
+      <ol>
+        <li>Sidebar → <strong>Aziende</strong> → <strong>+ Nuova Azienda</strong></li>
+        <li>Nome: <strong>TechStore Italia Srl</strong>, P.IVA: <strong>IT98765432109</strong></li>
+        <li>Email: info@techstore.it, Tel: +39 02 9876543, Città: Milano</li>
+      </ol>
+      <div class="verify">Azienda nella tabella con tutti i dati</div>
+    </div>
+    <div class="step">
+      <h3>2.2 — Aggiungi Contatto</h3>
+      <ol>
+        <li>Clicca sulla riga dell'azienda → tab <strong>Contatti</strong></li>
+        <li>Clicca <strong>Aggiungi Contatto</strong>: Giuseppe Ferraro, giuseppe@techstore.it, Direttore IT</li>
+        <li>Spunta <strong>Contatto principale</strong></li>
+      </ol>
+      <div class="verify">Contatto con badge "Principale"</div>
+    </div>
+    <div class="step">
+      <h3>2.3 — Crea Accesso Portale Cliente</h3>
+      <ol>
+        <li>Torna su <strong>Aziende</strong></li>
+        <li>Sulla riga TechStore, clicca l'icona viola <strong>👤+ Crea Accesso Portale</strong></li>
+        <li>Compila: Giuseppe Ferraro, giuseppe@techstore.it, Password: <code>Client123!@#</code></li>
+      </ol>
+      <div class="verify">Modale verde con credenziali da comunicare al cliente</div>
+      <div class="warning">Annota le credenziali — serviranno per testare il portale</div>
+    </div>
+  </div>
+</div>
+
+<!-- FASE 3 -->
+<div class="phase" onclick="this.classList.toggle('open')">
+  <div class="phase-header">
+    <div class="phase-number bg-indigo">3</div>
+    <h2>Gestione Lead</h2>
+    <span class="role role-commerciale">Commerciale</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="phase-body">
+    <div class="step">
+      <h3>3.1 — Crea il Lead</h3>
+      <ol>
+        <li>Sidebar → <strong>Lead</strong> → <strong>+ Nuovo Lead</strong></li>
+        <li>Azienda: TechStore Italia Srl</li>
+        <li><strong>Prodotto/Linea: E-COMMERCE</strong> (obbligatorio!)</li>
+        <li>Contatto: Giuseppe Ferraro, Fonte: Referral, Valore: 120.000 €</li>
+      </ol>
+      <div class="verify">Lead nella tabella con stato "Nuovo"</div>
+    </div>
+    <div class="step">
+      <h3>3.2 — Qualifica e Converti</h3>
+      <ol>
+        <li>Clicca sul lead → nel pannello laterale clicca <strong>In Qualifica</strong></li>
+        <li>Clicca <strong>Converti in Opportunità</strong> (pulsante verde)</li>
+        <li>Inserisci nome: "E-commerce TechStore 2026", seleziona azienda</li>
+      </ol>
+      <div class="verify">Banner verde "Opportunità creata con successo!"</div>
+    </div>
+  </div>
+</div>
+
+<!-- FASE 4 -->
+<div class="phase" onclick="this.classList.toggle('open')">
+  <div class="phase-header">
+    <div class="phase-number bg-orange">4</div>
+    <h2>Opportunità e Pre-vendita</h2>
+    <span class="role role-commerciale">Commerciale</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="phase-body">
+    <div class="step">
+      <h3>4.1 — Avanza l'Opportunità</h3>
+      <ol>
+        <li>Sidebar → <strong>Opportunità</strong></li>
+        <li>Clicca sull'opportunità, avanza: <strong>Pre-vendita → Preventivo</strong></li>
+      </ol>
+    </div>
+    <div class="step">
+      <h3>4.2 — Ticket Pre-vendita</h3>
+      <ol>
+        <li>Sidebar → <strong>Ticket</strong> → <strong>+ Nuovo Ticket</strong></li>
+        <li>Soggetto: "Fattibilità e-commerce TechStore", Priorità: Alta, SLA: Pre-vendita</li>
+        <li>Rispondi al ticket, aggiungi una nota interna</li>
+      </ol>
+      <div class="verify">Thread con messaggi e nota interna (sfondo diverso)</div>
+    </div>
+  </div>
+</div>
+
+<!-- FASE 5 -->
+<div class="phase" onclick="this.classList.toggle('open')">
+  <div class="phase-header">
+    <div class="phase-number bg-teal">5</div>
+    <h2>Preventivo</h2>
+    <span class="role role-commerciale">Commerciale</span>
+    <span class="role role-ceo">CEO</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="phase-body">
+    <div class="step">
+      <h3>5.1 — Crea il Preventivo</h3>
+      <ol>
+        <li>Sidebar → <strong>Preventivi</strong> → <strong>+ Nuovo Preventivo</strong></li>
+        <li>Titolo: "Preventivo E-commerce TechStore v1", Azienda: TechStore</li>
+        <li>Aggiungi le voci:</li>
+      </ol>
+      <table class="data-table">
+        <tr><th>Descrizione</th><th>Qty</th><th>Prezzo €</th><th>Tipo</th></tr>
+        <tr><td>Analisi e Design UX/UI</td><td>1</td><td>20.000</td><td>Fixed</td></tr>
+        <tr><td>Sviluppo Backend API</td><td>1</td><td>35.000</td><td>Fixed</td></tr>
+        <tr><td>Sviluppo Frontend React</td><td>1</td><td>30.000</td><td>Fixed</td></tr>
+        <tr><td>Migrazione dati</td><td>1</td><td>15.000</td><td>Fixed</td></tr>
+        <tr><td>Testing e Deploy</td><td>1</td><td>10.000</td><td>Fixed</td></tr>
+        <tr><td>Formazione (a giornata)</td><td>10</td><td>1.500</td><td>T&M</td></tr>
+      </table>
+      <div class="verify">Totale calcolato: 125.000 €</div>
+    </div>
+    <div class="step">
+      <h3>5.2 — Approvazione CEO</h3>
+      <ol>
+        <li>Clicca sul preventivo → stato <strong>Attesa CEO</strong></li>
+        <li>Sidebar → <strong>Approvazioni</strong> → clicca <strong>Approva</strong></li>
+      </ol>
+      <div class="auto">Approvazione creata automaticamente quando si invia a CEO</div>
+    </div>
+    <div class="step">
+      <h3>5.3 — Genera Documento e Invia</h3>
+      <ol>
+        <li>Torna sul preventivo → clicca <strong>Genera Documento</strong> (con template personalizzabile)</li>
+        <li>Clicca <strong>Invia al Cliente</strong></li>
+      </ol>
+      <div class="verify">Messaggio "Preventivo inviato! Il cliente lo vedrà nel portale."</div>
+    </div>
+  </div>
+</div>
+
+<!-- FASE 6 -->
+<div class="phase" onclick="this.classList.toggle('open')">
+  <div class="phase-header">
+    <div class="phase-number bg-cyan">6</div>
+    <h2>Il Cliente nel Portale</h2>
+    <span class="role role-cliente">Cliente</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="phase-body">
+    <div class="step">
+      <h3>6.1 — Login Portale</h3>
+      <ol>
+        <li>Apri <a href="http://localhost:5173/portal/login">http://localhost:5173/portal/login</a> (in incognito)</li>
+        <li>Email: <code>giuseppe@techstore.it</code> / Password: <code>Client123!@#</code></li>
+      </ol>
+      <div class="verify">Dashboard portale con KPI: Preventivi in Attesa = 1</div>
+    </div>
+    <div class="step">
+      <h3>6.2 — Accetta il Preventivo</h3>
+      <ol>
+        <li>Vai su <strong>Preventivi</strong> → clicca il preventivo</li>
+        <li>Visualizza le voci e il totale</li>
+        <li>Clicca <strong>Accetta Preventivo</strong></li>
+      </ol>
+      <div class="auto">Automaticamente: Opportunità → Accettato + Contratto auto-creato</div>
+    </div>
+    <div class="step">
+      <h3>6.3 — Apri un Ticket</h3>
+      <ol>
+        <li>Vai su <strong>Ticket</strong> → <strong>Nuovo Ticket</strong></li>
+        <li>"Richiesta tempistiche progetto"</li>
+      </ol>
+      <div class="verify">Ticket aperto, visibile anche nel pannello interno</div>
+    </div>
+  </div>
+</div>
+
+<!-- FASE 7 -->
+<div class="phase" onclick="this.classList.toggle('open')">
+  <div class="phase-header">
+    <div class="phase-number bg-emerald">7</div>
+    <h2>Contratto e Firma</h2>
+    <span class="role role-commerciale">Commerciale</span>
+    <span class="role role-ceo">CEO</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="phase-body">
+    <div class="step">
+      <h3>7.1 — Contratto Auto-Creato</h3>
+      <ol>
+        <li>Torna al pannello interno → Sidebar → <strong>Contratti</strong></li>
+        <li>Il contratto è stato creato automaticamente</li>
+      </ol>
+      <div class="auto">Il contratto si crea automaticamente quando il cliente accetta il preventivo</div>
+    </div>
+    <div class="step">
+      <h3>7.2 — Workflow Firma</h3>
+      <ol>
+        <li>Clicca sul contratto → <strong>Invia a CEO</strong></li>
+        <li>Sidebar → <strong>Approvazioni</strong> → Approva</li>
+        <li>Torna al contratto → <strong>Genera Documento</strong> per vedere il PDF</li>
+        <li>Aggiungi firmatario: giuseppe@techstore.it</li>
+        <li>Avanza: <strong>Avvia Firma → Conferma Firma</strong></li>
+      </ol>
+      <div class="auto">Dopo la firma: Proforma auto-creata con le voci del preventivo</div>
+    </div>
+  </div>
+</div>
+
+<!-- FASE 8 -->
+<div class="phase" onclick="this.classList.toggle('open')">
+  <div class="phase-header">
+    <div class="phase-number bg-amber">8</div>
+    <h2>Pagamento → Progetto</h2>
+    <span class="role role-admin">Amministrazione</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="phase-body">
+    <div class="step">
+      <h3>8.1 — Registra il Pagamento</h3>
+      <ol>
+        <li>Sidebar → <strong>Fatture</strong> → clicca la proforma</li>
+        <li>Sezione "Registra Pagamento": importo totale, bonifico, CRO-TECHSTORE-001</li>
+        <li>Clicca <strong>Registra Pagamento</strong></li>
+      </ol>
+      <div class="auto"><strong>GATE — 3 automazioni:</strong><br>
+        1. Fattura → Pagata<br>
+        2. Progetto creato automaticamente<br>
+        3. Opportunità → Vinto</div>
+    </div>
+  </div>
+</div>
+
+<!-- FASE 9 -->
+<div class="phase" onclick="this.classList.toggle('open')">
+  <div class="phase-header">
+    <div class="phase-number bg-sky">9</div>
+    <h2>Delivery — Progetto</h2>
+    <span class="role role-pm">PM</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="phase-body">
+    <div class="step">
+      <h3>9.1 — Crea i Task Gantt</h3>
+      <ol>
+        <li>Sidebar → <strong>Progetti</strong> → clicca il progetto → tab <strong>Task/Gantt</strong></li>
+        <li>Crea i task:</li>
+      </ol>
+      <table class="data-table">
+        <tr><th>Nome</th><th>Team</th><th>Assegnato a</th><th>Milestone</th></tr>
+        <tr><td>Kickoff Meeting</td><td>PM</td><td>Laura Bianchi</td><td>✓</td></tr>
+        <tr><td>Analisi Requisiti</td><td>Development</td><td>Andrea Verdi</td><td></td></tr>
+        <tr><td>Design UX/UI</td><td>Design</td><td>Sara Neri</td><td></td></tr>
+        <tr><td>Sviluppo Backend</td><td>Development</td><td>Andrea Verdi</td><td></td></tr>
+        <tr><td>Sviluppo Frontend</td><td>Development</td><td>Andrea Verdi</td><td></td></tr>
+        <tr><td>Testing & QA</td><td>Development</td><td>Andrea Verdi</td><td></td></tr>
+        <tr><td>Go-Live</td><td>PM</td><td>Laura Bianchi</td><td>✓</td></tr>
+      </table>
+    </div>
+    <div class="step">
+      <h3>9.2 — Registra Ore Lavorate</h3>
+      <ol>
+        <li>Sidebar → <strong>Ore Lavorate</strong> → <strong>+ Aggiungi Ore</strong></li>
+        <li>Progetto, data, 4 ore, "Analisi requisiti", fatturabile</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!-- FASE 10 -->
+<div class="phase" onclick="this.classList.toggle('open')">
+  <div class="phase-header">
+    <div class="phase-number bg-pink">10</div>
+    <h2>Supporto e Comunicazione</h2>
+    <span class="role role-support">Support</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="phase-body">
+    <div class="step">
+      <h3>10.1 — Rispondi al Ticket del Cliente</h3>
+      <ol>
+        <li>Sidebar → <strong>Ticket</strong></li>
+        <li>Il ticket del cliente ha badge <strong>"Portale"</strong></li>
+        <li>Clicca → scrivi risposta → <strong>Invia</strong></li>
+        <li>Cambia stato a <strong>Chiuso</strong></li>
+      </ol>
+      <div class="verify">Il cliente vedrà la risposta nel suo portale</div>
+    </div>
+  </div>
+</div>
+
+<!-- FASE 11 -->
+<div class="phase" onclick="this.classList.toggle('open')">
+  <div class="phase-header">
+    <div class="phase-number bg-rose">11</div>
+    <h2>Report e Dashboard</h2>
+    <span class="role role-ceo">CEO</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="phase-body">
+    <div class="step">
+      <h3>11.1 — Dashboard</h3>
+      <ol>
+        <li>Sidebar → <strong>Dashboard</strong></li>
+        <li>Verifica KPI aggiornati con dati reali</li>
+      </ol>
+    </div>
+    <div class="step">
+      <h3>11.2 — Report</h3>
+      <ol>
+        <li>Sidebar → <strong>Report</strong></li>
+        <li>5 tab: Vendite, Pipeline, Delivery, Supporto, Finanziario</li>
+        <li>Clicca <strong>Esporta CSV</strong></li>
+      </ol>
+    </div>
+    <div class="step">
+      <h3>11.3 — Notifiche e Registro</h3>
+      <ol>
+        <li>Sidebar → <strong>Notifiche</strong> → verifica notifiche automatiche</li>
+        <li>Sidebar → <strong>Registro</strong> → audit log di tutte le azioni</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKLIST -->
+<div class="checklist">
+  <h2>✅ Checklist Completa</h2>
+
+  <h3>Setup</h3>
+  <label><input type="checkbox"> Login funzionante</label>
+  <label><input type="checkbox"> 5 reparti creati</label>
+  <label><input type="checkbox"> 4 prodotti nel catalogo</label>
+  <label><input type="checkbox"> 5 utenti interni con ruoli</label>
+
+  <h3>Ciclo Cliente</h3>
+  <label><input type="checkbox"> Azienda creata con P.IVA e dati completi</label>
+  <label><input type="checkbox"> Contatto principale associato</label>
+  <label><input type="checkbox"> Accesso portale creato (credenziali visibili)</label>
+  <label><input type="checkbox"> Vista 360° con 5 tab funzionanti</label>
+
+  <h3>Ciclo Commerciale</h3>
+  <label><input type="checkbox"> Lead creato con prodotto obbligatorio</label>
+  <label><input type="checkbox"> Lead convertito in opportunità</label>
+  <label><input type="checkbox"> Preventivo con voci e totale calcolato</label>
+  <label><input type="checkbox"> CEO approva il preventivo</label>
+  <label><input type="checkbox"> Documento generato da template personalizzabile</label>
+  <label><input type="checkbox"> Preventivo inviato al cliente</label>
+
+  <h3>Portale Cliente</h3>
+  <label><input type="checkbox"> Cliente accede al portale</label>
+  <label><input type="checkbox"> Cliente vede e accetta il preventivo</label>
+  <label><input type="checkbox"> Cliente apre ticket dal portale</label>
+
+  <h3>Contratto e Pagamento</h3>
+  <label><input type="checkbox"> Contratto auto-creato dall'accettazione</label>
+  <label><input type="checkbox"> CEO approva il contratto</label>
+  <label><input type="checkbox"> Contratto firmato</label>
+  <label><input type="checkbox"> Proforma auto-creata con voci</label>
+  <label><input type="checkbox"> Pagamento registrato → GATE → Progetto creato</label>
+
+  <h3>Delivery</h3>
+  <label><input type="checkbox"> Task Gantt con assegnazioni e milestone</label>
+  <label><input type="checkbox"> Ore lavorate registrate</label>
+  <label><input type="checkbox"> Progresso aggiornato</label>
+
+  <h3>Analisi</h3>
+  <label><input type="checkbox"> Dashboard con KPI reali</label>
+  <label><input type="checkbox"> Report con grafici e export CSV</label>
+  <label><input type="checkbox"> Notifiche e audit log</label>
+</div>
+
+<!-- AUTOMAZIONI -->
+<div class="automations">
+  <h2>⚡ Automazioni del Sistema</h2>
+  <div class="auto-row"><span class="auto-trigger">Preventivo → Attesa CEO</span><span class="auto-arrow">→</span><span class="auto-action">Crea Approvazione per CEO</span></div>
+  <div class="auto-row"><span class="auto-trigger">CEO approva preventivo</span><span class="auto-arrow">→</span><span class="auto-action">Status → Approvato</span></div>
+  <div class="auto-row"><span class="auto-trigger">CEO rifiuta preventivo</span><span class="auto-arrow">→</span><span class="auto-action">Status → Bozza + Notifica</span></div>
+  <div class="auto-row"><span class="auto-trigger">Preventivo → Inviato</span><span class="auto-arrow">→</span><span class="auto-action">Email al cliente</span></div>
+  <div class="auto-row"><span class="auto-trigger">Cliente accetta preventivo</span><span class="auto-arrow">→</span><span class="auto-action">Opportunità → Accettato + Contratto creato</span></div>
+  <div class="auto-row"><span class="auto-trigger">Cliente rifiuta preventivo</span><span class="auto-arrow">→</span><span class="auto-action">Opportunità → Perso</span></div>
+  <div class="auto-row"><span class="auto-trigger">Contratto → Attesa CEO</span><span class="auto-arrow">→</span><span class="auto-action">Crea Approvazione per CEO</span></div>
+  <div class="auto-row"><span class="auto-trigger">CEO approva contratto</span><span class="auto-arrow">→</span><span class="auto-action">Contratto → Pronto per firma</span></div>
+  <div class="auto-row"><span class="auto-trigger">Contratto firmato</span><span class="auto-arrow">→</span><span class="auto-action">Proforma auto-creata con voci</span></div>
+  <div class="auto-row"><span class="auto-trigger">Pagamento completato</span><span class="auto-arrow">→</span><span class="auto-action">Progetto auto-creato + Opportunità → Vinto</span></div>
+  <div class="auto-row"><span class="auto-trigger">SLA ticket scaduto</span><span class="auto-arrow">→</span><span class="auto-action">Escalation automatica (ogni 5 min)</span></div>
+  <div class="auto-row"><span class="auto-trigger">Fattura scaduta</span><span class="auto-arrow">→</span><span class="auto-action">Segna come Overdue (ogni 15 min)</span></div>
+</div>
+
+</div>
+
+<div style="text-align:center; padding: 40px; color: #94a3b8; font-size: 0.85rem;">
+  CRM Connecteed © 2026 — Connecteed Srl
+</div>
+
+</body>
+</html>

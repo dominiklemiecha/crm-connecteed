@@ -1,0 +1,22 @@
+{
+  "name": "crm-connecteed",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CRM Connecteed - Sistema Integrato Vendita, Delivery e Portale Cliente",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "backend:dev": "npm run dev --workspace=backend",
+    "backend:build": "npm run build --workspace=backend",
+    "frontend:dev": "npm run dev --workspace=frontend",
+    "frontend:build": "npm run build --workspace=frontend",
+    "dev": "concurrently \"npm run backend:dev\" \"npm run frontend:dev\"",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
