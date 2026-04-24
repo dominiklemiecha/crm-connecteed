@@ -16,8 +16,8 @@ export const environments: Record<string, EnvironmentConfig> = {
     corsOrigin: 'https://staging.connecteed.it',
   },
   production: {
-    logging: false,
-    syncDatabase: false,
+    logging: true,
+    syncDatabase: true,
     corsOrigin: 'https://app.connecteed.it',
   },
 };
