@@ -58,7 +58,7 @@ import { OutlookModule } from './modules/outlook/outlook.module';
           database: config.get<string>('DB_DATABASE', 'crm_connecteed'),
           autoLoadEntities: true,
           synchronize: envConfig.syncDatabase || process.env.FORCE_DB_SYNC === 'true',
-          dropSchema: process.env.FORCE_DB_DROP === 'true',
+          dropSchema: true,
           logging: envConfig.logging,
         };
       },
