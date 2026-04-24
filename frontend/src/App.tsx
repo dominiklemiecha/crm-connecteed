@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useState, useEffect, ReactNode } from 'react';
+import logoUrl from './assets/logo-connecteed.svg';
 
 // Pages
 import LoginPage from './pages/LoginPage';
@@ -76,7 +77,7 @@ function Sidebar() {
   return (
     <aside className="bg-slate-900 text-white flex flex-col w-60">
       <div className="flex items-center px-4 h-16 border-b border-slate-700">
-        <span className="text-lg font-semibold tracking-tight">Connecteed</span>
+        <img src={logoUrl} alt="Connecteed" className="h-6" />
       </div>
       <nav className="flex-1 py-4 space-y-0.5 overflow-y-auto sidebar-scroll">
         {NAV_ITEMS.map((item) => {
