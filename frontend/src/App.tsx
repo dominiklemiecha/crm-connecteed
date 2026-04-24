@@ -66,10 +66,17 @@ function SvgIcon({ d }: { d: string }) {
 
 function Sidebar() {
   const location = useLocation();
+  const userRaw = localStorage.getItem('user');
+  const user = userRaw ? JSON.parse(userRaw) : null;
+  const fullName = user ? `${user.firstName ?? ''} ${user.lastName ?? ''}`.trim() : 'Utente';
+  const initials = user
+    ? `${(user.firstName?.[0] ?? '').toUpperCase()}${(user.lastName?.[0] ?? '').toUpperCase()}`
+    : 'U';
+  const roleLabel = user?.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : '';
   return (
     <aside className="bg-slate-900 text-white flex flex-col w-60">
       <div className="flex items-center px-4 h-16 border-b border-slate-700">
-        <img src="/src/assets/logo-BebI3mm7.svg" alt="Connecteed" className="h-6" />
+        <span className="text-lg font-semibold tracking-tight">Connecteed</span>
       </div>
       <nav className="flex-1 py-4 space-y-0.5 overflow-y-auto sidebar-scroll">
         {NAV_ITEMS.map((item) => {
@@ -89,10 +96,10 @@ function Sidebar() {
       </nav>
       <div className="border-t border-slate-700 p-4">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">DC</div>
+          <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">{initials}</div>
           <div className="min-w-0">
-            <p className="text-sm font-medium truncate">Dominik C.</p>
-            <p className="text-xs text-slate-400 truncate">Admin</p>
+            <p className="text-sm font-medium truncate">{fullName}</p>
+            <p className="text-xs text-slate-400 truncate">{roleLabel}</p>
           </div>
         </div>
       </div>
