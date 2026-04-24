@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>CRM Connecteed — Guida Uso Quotidiano</title>
+<style>
+  @page { size: A4; margin: 20mm 18mm; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1f2937;
+    line-height: 1.55;
+    font-size: 11pt;
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 24px 28px;
+    background: #fff;
+  }
+  h1, h2, h3, h4 { color: #0f172a; line-height: 1.2; }
+  h1 { font-size: 26pt; margin: 0 0 6px; letter-spacing: -0.02em; }
+  h2 {
+    font-size: 17pt;
+    margin: 34px 0 14px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #2563eb;
+    page-break-after: avoid;
+  }
+  h3 {
+    font-size: 13pt;
+    margin: 22px 0 8px;
+    color: #1e40af;
+    page-break-after: avoid;
+  }
+  h4 { font-size: 11.5pt; margin: 14px 0 6px; color: #334155; }
+  p, li { margin: 6px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  li { margin: 3px 0; }
+  code {
+    background: #f1f5f9;
+    color: #0f172a;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: "SF Mono", Consolas, monospace;
+    font-size: 0.92em;
+  }
+  .cover {
+    text-align: center;
+    padding: 60px 20px 40px;
+    margin-bottom: 40px;
+    border-bottom: 4px double #2563eb;
+  }
+  .cover h1 { font-size: 32pt; color: #2563eb; }
+  .cover .subtitle { color: #475569; font-size: 13pt; margin-top: 10px; }
+  .cover .meta { color: #94a3b8; font-size: 10pt; margin-top: 22px; }
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 9.5pt;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .badge-step { background: #dbeafe; color: #1e40af; }
+  .badge-role { background: #fef3c7; color: #92400e; margin-left: 6px; }
+  .box {
+    background: #f8fafc;
+    border-left: 4px solid #2563eb;
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 4px;
+    page-break-inside: avoid;
+  }
+  .box-warn { border-left-color: #f59e0b; background: #fffbeb; }
+  .box-tip { border-left-color: #10b981; background: #ecfdf5; }
+  .box-danger { border-left-color: #ef4444; background: #fef2f2; }
+  .box h4 { margin-top: 0; }
+  .flow-diagram {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+    page-break-inside: avoid;
+  }
+  .flow-step {
+    flex: 1 1 140px;
+    min-width: 120px;
+    padding: 10px 12px;
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 10pt;
+    font-weight: 600;
+    position: relative;
+  }
+  .flow-step::after {
+    content: "→";
+    position: absolute;
+    right: -14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #2563eb;
+    font-weight: bold;
+    font-size: 14pt;
+  }
+  .flow-step:last-child::after { display: none; }
+  .toc {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 18px 24px;
+    margin: 20px 0 30px;
+  }
+  .toc h3 { margin-top: 0; border: none; color: #0f172a; }
+  .toc ol { margin: 0; }
+  .toc a { color: #2563eb; text-decoration: none; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 10pt;
+  }
+  th, td { border: 1px solid #e2e8f0; padding: 6px 10px; text-align: left; vertical-align: top; }
+  th { background: #f1f5f9; font-weight: 600; }
+  .kbd {
+    font-family: "SF Mono", Consolas, monospace;
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 0.88em;
+  }
+  .section { page-break-before: auto; page-break-inside: avoid; }
+  .step-num {
+    display: inline-block;
+    width: 24px; height: 24px;
+    background: #2563eb; color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    font-weight: 700;
+    margin-right: 8px;
+    font-size: 10pt;
+  }
+  hr { border: none; border-top: 1px solid #e2e8f0; margin: 24px 0; }
+  .footer-note {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 9pt;
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid #e2e8f0;
+  }
+  @media print {
+    h2 { page-break-after: avoid; }
+    .no-print { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="no-print" style="background:#2563eb;color:#fff;padding:12px 18px;border-radius:6px;margin-bottom:24px;">
+  <strong>📄 Suggerimento:</strong> per salvare questa guida in PDF, premi <span class="kbd">Ctrl+P</span> (o <span class="kbd">Cmd+P</span> su Mac) → scegli "Salva come PDF" come stampante di destinazione.
+</div>
+
+<div class="cover">
+  <h1>CRM Connecteed</h1>
+  <div class="subtitle">Guida Operativa — Flusso di Lavoro Quotidiano</div>
+  <div class="meta">Versione 1.0 · Aprile 2026 · Connecteed Srl</div>
+</div>
+
+<div class="toc">
+  <h3>Indice</h3>
+  <ol>
+    <li><a href="#intro">Introduzione e accesso</a></li>
+    <li><a href="#flow">Il flusso completo a colpo d'occhio</a></li>
+    <li><a href="#fase1">Fase 1 — Acquisizione Lead</a></li>
+    <li><a href="#fase2">Fase 2 — Qualificazione e Opportunità</a></li>
+    <li><a href="#fase3">Fase 3 — Preventivo</a></li>
+    <li><a href="#fase4">Fase 4 — Contratto e Firma</a></li>
+    <li><a href="#fase5">Fase 5 — Fattura Acconto e Gate di Pagamento</a></li>
+    <li><a href="#fase6">Fase 6 — Progetto (Delivery)</a></li>
+    <li><a href="#fase7">Fase 7 — Time tracking e avanzamento</a></li>
+    <li><a href="#fase8">Fase 8 — Change Requests</a></li>
+    <li><a href="#fase9">Fase 9 — Fatturazione milestone e saldo</a></li>
+    <li><a href="#fase10">Fase 10 — Chiusura progetto</a></li>
+    <li><a href="#supporto">Supporto post-delivery: Ticket</a></li>
+    <li><a href="#portale">Portale Cliente</a></li>
+    <li><a href="#admin">Amministrazione e Report</a></li>
+    <li><a href="#daily">Routine giornaliera tipo</a></li>
+  </ol>
+</div>
+
+<!-- ============================================================= -->
+<h2 id="intro">1. Introduzione e accesso</h2>
+
+<p>CRM Connecteed è la piattaforma integrata che copre l'intero ciclo di vita di un cliente: <strong>dal primo contatto al supporto post-consegna</strong>. È progettata per ridurre drasticamente il tempo speso su attività amministrative, automatizzando notifiche, gate di pagamento, SLA e documenti.</p>
+
+<h3>Come accedere</h3>
+<ol>
+  <li>Apri il browser all'indirizzo <code>https://crm.connecteed.com</code></li>
+  <li>Inserisci la tua email aziendale e password</li>
+  <li>Click su <strong>Accedi</strong></li>
+</ol>
+
+<div class="box box-tip">
+  <h4>💡 Primo login</h4>
+  <p>Al primo accesso ti consigliamo di cambiare subito la password dal tuo profilo (icona utente in alto a destra) e di impostare la foto profilo.</p>
+</div>
+
+<h3>Navigazione</h3>
+<p>La <strong>sidebar a sinistra</strong> è sempre visibile e contiene i moduli principali, organizzati nell'ordine in cui vengono usati durante il ciclo di vita di un cliente. In alto trovi la <strong>barra ricerca globale</strong> e le <strong>notifiche</strong>.</p>
+
+<!-- ============================================================= -->
+<h2 id="flow">2. Il flusso completo a colpo d'occhio</h2>
+
+<p>Questo è il percorso standard di un cliente, dall'acquisizione alla chiusura:</p>
+
+<div class="flow-diagram">
+  <div class="flow-step">1. Lead</div>
+  <div class="flow-step">2. Opportunità</div>
+  <div class="flow-step">3. Preventivo</div>
+  <div class="flow-step">4. Contratto</div>
+  <div class="flow-step">5. Fattura Acconto</div>
+</div>
+
+<div class="flow-diagram">
+  <div class="flow-step">6. PAGAMENTO</div>
+  <div class="flow-step">7. Progetto</div>
+  <div class="flow-step">8. Delivery</div>
+  <div class="flow-step">9. Saldo</div>
+  <div class="flow-step">10. Chiusura</div>
+</div>
+
+<div class="box box-warn">
+  <h4>⚠️ Gate Acconto — regola fondamentale</h4>
+  <p>Un <strong>progetto viene creato automaticamente solo dopo il primo pagamento</strong> (acconto). Fino a quel momento il flusso resta nella fase commerciale. Questo impedisce di iniziare lavori non garantiti da un pagamento.</p>
+</div>
+
+<!-- ============================================================= -->
+<h2 id="fase1">3. Fase 1 — Acquisizione Lead <span class="badge badge-role">Commerciale</span></h2>
+
+<p>Un <strong>Lead</strong> è un contatto potenziale non ancora qualificato: può arrivare da form del sito, fiera, chiamata, referral.</p>
+
+<h3>Come creare un Lead</h3>
+<ol>
+  <li>Sidebar → <strong>Leads</strong></li>
+  <li>Click <strong>+ Nuovo Lead</strong></li>
+  <li>Compila: Nome azienda, Nome contatto, Email, Telefono, Fonte</li>
+  <li>(Opzionale) Stima valore e probabilità</li>
+  <li>Assegna un owner (chi deve seguirlo)</li>
+  <li>Salva</li>
+</ol>
+
+<h3>Stati di un Lead</h3>
+<table>
+  <tr><th>Stato</th><th>Significato</th><th>Azione tipica</th></tr>
+  <tr><td><strong>New</strong></td><td>Appena creato, mai contattato</td><td>Chiamare entro 24h</td></tr>
+  <tr><td><strong>Qualifying</strong></td><td>Primo contatto fatto, si sta valutando</td><td>Scoperta esigenze, BANT</td></tr>
+  <tr><td><strong>Qualified</strong></td><td>C'è interesse reale e budget</td><td>Convertire in Opportunità</td></tr>
+  <tr><td><strong>Unqualified</strong></td><td>Non interessante o fuori target</td><td>Archiviare con nota</td></tr>
+</table>
+
+<div class="box box-tip">
+  <h4>💡 Best practice</h4>
+  <p>Imposta sempre una <strong>Next Due Date</strong> (prossima azione) sui Lead in lavorazione. Il sistema ti notifica in automatico quando scade la data.</p>
+</div>
+
+<!-- ============================================================= -->
+<h2 id="fase2">4. Fase 2 — Qualificazione e Opportunità <span class="badge badge-role">Commerciale</span></h2>
+
+<p>Quando un Lead diventa <strong>Qualified</strong>, lo converti in <strong>Opportunità</strong>. L'Opportunità è un'occasione di vendita concreta, con prodotti/servizi definiti e un valore stimato.</p>
+
+<h3>Convertire un Lead in Opportunità</h3>
+<ol>
+  <li>Apri il Lead → click <strong>Converti in Opportunità</strong></li>
+  <li>Il sistema crea automaticamente: Azienda, Contatto, Opportunità</li>
+  <li>Aggiungi i <strong>prodotti/servizi</strong> dall'anagrafica</li>
+  <li>Imposta <strong>fase di pipeline</strong>, valore, probabilità, data chiusura attesa</li>
+</ol>
+
+<h3>Pipeline di vendita</h3>
+<p>Dal menu <strong>Opportunità</strong> puoi vedere la pipeline in modalità Kanban (trascini le opportunità tra le fasi) o in lista.</p>
+
+<table>
+  <tr><th>Fase</th><th>Probabilità tipica</th></tr>
+  <tr><td>Discovery</td><td>10–20%</td></tr>
+  <tr><td>Proposta inviata</td><td>30–50%</td></tr>
+  <tr><td>Negoziazione</td><td>60–75%</td></tr>
+  <tr><td>Chiusura</td><td>90%+</td></tr>
+  <tr><td>Vinta / Persa</td><td>100% / 0%</td></tr>
+</table>
+
+<!-- ============================================================= -->
+<h2 id="fase3">5. Fase 3 — Preventivo <span class="badge badge-role">Commerciale</span></h2>
+
+<p>Dal Preventivo inizia la formalizzazione dell'offerta.</p>
+
+<h3>Creare un Preventivo</h3>
+<ol>
+  <li>Dall'Opportunità → click <strong>Crea Preventivo</strong></li>
+  <li>Scegli il <strong>template</strong> (si caricano automaticamente le voci)</li>
+  <li>Modifica quantità, prezzi, sconti se necessario</li>
+  <li>Aggiungi condizioni (tempi di consegna, modalità di pagamento, validità)</li>
+  <li><strong>Anteprima PDF</strong> per verificare</li>
+  <li>Click <strong>Invia al cliente</strong> → partono email + il cliente lo vedrà nel Portale</li>
+</ol>
+
+<h3>Stati di un Preventivo</h3>
+<ul>
+  <li><strong>Draft</strong> — in lavorazione, non ancora inviato</li>
+  <li><strong>Sent</strong> — inviato, in attesa di risposta</li>
+  <li><strong>Viewed</strong> — il cliente l'ha aperto nel portale (tracciato)</li>
+  <li><strong>Accepted</strong> — cliente ha accettato → si genera Contratto</li>
+  <li><strong>Declined</strong> — rifiutato (con motivazione se fornita)</li>
+  <li><strong>Changes requested</strong> — cliente chiede modifiche</li>
+</ul>
+
+<div class="box box-tip">
+  <h4>💡 Tip</h4>
+  <p>Se il cliente chiede modifiche dal Portale, ricevi notifica; duplichi il preventivo, aggiorni le voci e rimandi. Non modificare un preventivo già inviato — crei sempre una nuova revisione.</p>
+</div>
+
+<!-- ============================================================= -->
+<h2 id="fase4">6. Fase 4 — Contratto e Firma <span class="badge badge-role">Commerciale / Legal</span></h2>
+
+<p>Quando il preventivo è accettato, il sistema genera un <strong>contratto bozza</strong> sulla base del template.</p>
+
+<h3>Finalizzare il Contratto</h3>
+<ol>
+  <li>Sidebar → <strong>Contratti</strong> → apri il contratto generato</li>
+  <li>Verifica clausole, date, importi, piano pagamenti</li>
+  <li>Imposta: <strong>acconto</strong> (% o importo), <strong>milestone</strong>, <strong>saldo</strong></li>
+  <li>Click <strong>Invia per firma</strong> (integrazione DocuSign)</li>
+  <li>Il cliente firma online → stato passa a <strong>Firmato</strong></li>
+</ol>
+
+<div class="box box-warn">
+  <h4>⚠️ Piano pagamenti</h4>
+  <p>Il piano pagamenti definito qui guida tutto il resto. Esempio tipico: 30% acconto, 40% a milestone intermedia, 30% a consegna.</p>
+</div>
+
+<!-- ============================================================= -->
+<h2 id="fase5">7. Fase 5 — Fattura Acconto e Gate di Pagamento <span class="badge badge-role">Amministrazione</span></h2>
+
+<h3>Emissione fattura acconto</h3>
+<ol>
+  <li>Dal Contratto firmato → tab <strong>Fatture</strong> → click <strong>Genera Fattura Acconto</strong></li>
+  <li>Il sistema applica automaticamente IVA, genera numero progressivo, sincronizza con <strong>Fatture in Cloud</strong></li>
+  <li>Invia al cliente (PEC + Portale)</li>
+</ol>
+
+<h3>Registrazione del pagamento</h3>
+<ol>
+  <li>Quando ricevi il bonifico → sidebar <strong>Fatture</strong> → apri la fattura acconto</li>
+  <li>Click <strong>Registra pagamento</strong> → inserisci data, importo, metodo, riferimento</li>
+  <li>Stato fattura: <strong>Pagata</strong></li>
+</ol>
+
+<div class="box box-danger">
+  <h4>🔑 GATE ACCONTO — Attivazione automatica</h4>
+  <p>Non appena registri il pagamento dell'acconto, succedono 3 cose automaticamente:</p>
+  <ol>
+    <li>Il <strong>progetto viene creato</strong> in stato "Ready"</li>
+    <li>Il Project Manager e il team assegnato ricevono notifica</li>
+    <li>Il cliente vede il progetto apparire nel suo Portale</li>
+  </ol>
+  <p><strong>Prima del pagamento acconto, nessun lavoro di delivery è visibile o attivabile.</strong></p>
+</div>
+
+<!-- ============================================================= -->
+<h2 id="fase6">8. Fase 6 — Progetto (Delivery) <span class="badge badge-role">Delivery / PM</span></h2>
+
+<h3>Setup del progetto</h3>
+<ol>
+  <li>Sidebar → <strong>Progetti</strong> → apri il progetto appena creato</li>
+  <li>Tab <strong>WBS</strong>: verifica le fasi caricate dal template. Modifica se serve.</li>
+  <li>Tab <strong>Gantt</strong>: definisci date pianificate, dipendenze tra task, assegnazioni</li>
+  <li>Click <strong>Imposta baseline</strong> — fotografa la pianificazione iniziale (per confronti futuri)</li>
+  <li>Stato progetto → <strong>In Progress</strong></li>
+</ol>
+
+<h3>Struttura tipica del progetto</h3>
+<ul>
+  <li><strong>Informazioni</strong> — dati generali, cliente, PM, team</li>
+  <li><strong>WBS</strong> — work breakdown, fasi di alto livello</li>
+  <li><strong>Gantt</strong> — task con date, dipendenze, milestone</li>
+  <li><strong>Time Tracking</strong> — ore lavorate</li>
+  <li><strong>File</strong> — documenti condivisi (anche con cliente se visibili)</li>
+  <li><strong>Change Requests</strong> — modifiche in corso d'opera</li>
+  <li><strong>Fatturazione</strong> — milestone e stato pagamenti</li>
+</ul>
+
+<!-- ============================================================= -->
+<h2 id="fase7">9. Fase 7 — Time Tracking e Avanzamento <span class="badge badge-role">Team / PM</span></h2>
+
+<h3>Per i membri del team</h3>
+<ol>
+  <li>Sidebar → <strong>Time Tracking</strong></li>
+  <li>Click <strong>+ Nuova registrazione</strong></li>
+  <li>Seleziona: progetto, task Gantt, data, ore, descrizione</li>
+  <li>Salva</li>
+</ol>
+
+<h3>Per il PM — aggiornare avanzamento</h3>
+<ol>
+  <li>Apri il progetto → tab <strong>Gantt</strong></li>
+  <li>Su ogni task, aggiorna il <strong>% completato</strong> e stato (Todo / In Progress / Done / Blocked)</li>
+  <li>Il progresso % del progetto si aggiorna automaticamente</li>
+  <li>Se un task va in ritardo: stato <strong>Blocked</strong> + motivo → notifica automatica a CEO</li>
+</ol>
+
+<div class="box box-tip">
+  <h4>💡 Propose reschedule</h4>
+  <p>Se un task slitta, invece di modificare date a mano, usa <strong>Proponi Riprogrammazione</strong> — il sistema ricalcola tutte le dipendenze a valle e ti fa approvare la nuova baseline.</p>
+</div>
+
+<!-- ============================================================= -->
+<h2 id="fase8">10. Fase 8 — Change Requests <span class="badge badge-role">PM / Cliente</span></h2>
+
+<p>Se il cliente chiede modifiche fuori scope, <strong>non modificare mai direttamente il progetto</strong>. Apri sempre una Change Request.</p>
+
+<h3>Flusso CR</h3>
+<ol>
+  <li>Apri il progetto → tab <strong>Change Requests</strong> → <strong>+ Nuova CR</strong></li>
+  <li>Titolo, descrizione, richiedente</li>
+  <li>Stato iniziale: <strong>Open</strong></li>
+  <li>Il PM fa <strong>Impact Analysis</strong>: giorni aggiuntivi, costo stimato → stato <strong>Impact Analysis</strong></li>
+  <li>Il CEO approva/rifiuta → stato <strong>Awaiting Client</strong></li>
+  <li>Se approvato, il sistema genera <strong>preventivo aggiuntivo</strong> e <strong>addendum contrattuale</strong></li>
+  <li>Cliente accetta → stato <strong>Approved</strong> → le modifiche rientrano nel progetto</li>
+</ol>
+
+<!-- ============================================================= -->
+<h2 id="fase9">11. Fase 9 — Fatturazione milestone e saldo <span class="badge badge-role">Amministrazione</span></h2>
+
+<p>Quando una milestone di pagamento viene raggiunta:</p>
+<ol>
+  <li>Sidebar → <strong>Fatture</strong> → <strong>Genera da contratto</strong> → scegli la milestone</li>
+  <li>Verifica e invia</li>
+  <li>Registra il pagamento quando arriva</li>
+</ol>
+
+<div class="box box-warn">
+  <h4>⚠️ Fatture in ritardo</h4>
+  <p>Lo Scheduler controlla ogni 15 minuti le fatture in scadenza. Se una fattura passa la <strong>due date</strong> senza pagamento, diventa <strong>Overdue</strong> e parte una notifica automatica all'amministrazione + al cliente.</p>
+</div>
+
+<!-- ============================================================= -->
+<h2 id="fase10">12. Fase 10 — Chiusura progetto <span class="badge badge-role">PM</span></h2>
+
+<ol>
+  <li>Tutti i task Gantt al 100% → progetto al 100%</li>
+  <li>Fattura saldo emessa e pagata</li>
+  <li>PM fa click su <strong>Chiudi progetto</strong> → stato <strong>Closed</strong></li>
+  <li>Il cliente riceve email di ringraziamento + link al portale per accedere ai deliverable</li>
+  <li>(Opzionale) Attiva contratto di manutenzione / supporto ricorrente</li>
+</ol>
+
+<!-- ============================================================= -->
+<h2 id="supporto">13. Supporto post-delivery: Ticket <span class="badge badge-role">Support</span></h2>
+
+<p>Dopo la chiusura, il cliente può aprire ticket dal Portale.</p>
+
+<h3>Gestione ticket</h3>
+<ol>
+  <li>Sidebar → <strong>Ticket</strong></li>
+  <li>I nuovi ticket appaiono con classe SLA (Presales / Delivery / Support / Admin) e priorità</li>
+  <li>Apri il ticket → assegna a te o a un collega</li>
+  <li>Rispondi (le risposte arrivano al cliente via email + portale)</li>
+  <li>Aggiorna stato: <strong>In Progress</strong> → <strong>Waiting</strong> → <strong>Closed</strong></li>
+</ol>
+
+<div class="box box-tip">
+  <h4>💡 SLA automatico</h4>
+  <p>Ogni 5 minuti il sistema verifica le scadenze SLA (first response + resolution). Se stai per sforare, ricevi un alert. Se sfori, parte l'escalation al responsabile.</p>
+</div>
+
+<h3>Canned responses</h3>
+<p>Nella sezione <strong>Risposte rapide</strong> puoi creare template di risposta riutilizzabili (es. "Istruzioni reset password", "Procedura rinnovo"). Click e incolla nel ticket.</p>
+
+<!-- ============================================================= -->
+<h2 id="portale">14. Portale Cliente <span class="badge badge-role">Cliente</span></h2>
+
+<p>Ogni cliente ha un suo accesso al Portale (<code>https://crm.connecteed.com/portal</code>).</p>
+
+<h3>Cosa vede il cliente</h3>
+<ul>
+  <li><strong>Dashboard</strong> — panoramica progetti attivi, fatture, ticket aperti</li>
+  <li><strong>Progetti</strong> — avanzamento %, prossime milestone, baseline vs reale</li>
+  <li><strong>Preventivi</strong> — accetta / rifiuta / richiedi modifiche</li>
+  <li><strong>Ticket</strong> — apre nuovi, vede storico</li>
+  <li><strong>File</strong> — tutti i documenti resi visibili dal CRM (flag "visibile al cliente")</li>
+</ul>
+
+<div class="box box-warn">
+  <h4>⚠️ Visibilità file e ticket</h4>
+  <p>I file e i ticket hanno un flag <strong>"Visibile al cliente"</strong>. Solo gli elementi con flag attivo appaiono nel portale. Di default: file = non visibile, ticket aperti dal cliente = visibili.</p>
+</div>
+
+<!-- ============================================================= -->
+<h2 id="admin">15. Amministrazione e Report <span class="badge badge-role">Management</span></h2>
+
+<h3>Dashboard</h3>
+<p>La home del CRM mostra KPI in tempo reale: lead attivi, opportunità in pipeline, ticket aperti, preventivi in attesa, progetti attivi, fatture in scadenza.</p>
+
+<h3>Report</h3>
+<table>
+  <tr><th>Report</th><th>Usa quando</th></tr>
+  <tr><td>Sales</td><td>Analisi vendite per periodo/commerciale</td></tr>
+  <tr><td>Pipeline</td><td>Opportunità in corso, valore atteso, probabilità pesata</td></tr>
+  <tr><td>Delivery</td><td>Progetti in corso, ritardi, carico team</td></tr>
+  <tr><td>Support</td><td>Volume ticket, SLA compliance, tempi medi</td></tr>
+  <tr><td>Financial</td><td>Fatturato, pagato, scaduto, previsionale</td></tr>
+</table>
+
+<p>Tutti i report sono <strong>esportabili in Excel</strong> dal pulsante Export.</p>
+
+<h3>Registro audit</h3>
+<p>Sidebar → <strong>Registro</strong>. Ogni azione critica viene loggata: chi, quando, cosa. Consultabile da utenti con ruolo admin/CEO per compliance.</p>
+
+<!-- ============================================================= -->
+<h2 id="daily">16. Routine giornaliera tipo</h2>
+
+<h3>Commerciale</h3>
+<ol>
+  <li>🌅 <strong>08:30</strong> — Apri CRM, controlla notifiche notturne + lead nuovi</li>
+  <li><strong>09:00</strong> — Rispondi alle richieste di modifica preventivi dal portale</li>
+  <li><strong>10:00</strong> — Chiamate ai lead con "Next Due Date" di oggi</li>
+  <li><strong>14:00</strong> — Pipeline review: aggiorna probabilità e date chiusura attese</li>
+  <li><strong>17:00</strong> — Crea preventivi richiesti in mattinata</li>
+</ol>
+
+<h3>Project Manager</h3>
+<ol>
+  <li><strong>08:30</strong> — Controlla task in scadenza oggi nei tuoi progetti</li>
+  <li><strong>09:00</strong> — Daily standup: aggiorna % avanzamento nei Gantt</li>
+  <li>Durante la giornata — gestisci change requests, sblocchi task bloccati</li>
+  <li><strong>17:00</strong> — Review carico team e rischi delivery</li>
+</ol>
+
+<h3>Amministrazione</h3>
+<ol>
+  <li><strong>09:00</strong> — Controlla fatture in scadenza (report Financial)</li>
+  <li><strong>10:00</strong> — Registra pagamenti arrivati (banca → CRM)</li>
+  <li><strong>11:00</strong> — Emetti fatture da milestone raggiunte</li>
+  <li><strong>15:00</strong> — Solleciti per fatture scadute (il sistema invia già automaticamente, ma verifica risposte)</li>
+</ol>
+
+<h3>Support</h3>
+<ol>
+  <li><strong>08:30</strong> — Triage nuovi ticket notturni: priorità e assegnazione</li>
+  <li>Durante la giornata — gestisci ticket in ordine SLA</li>
+  <li><strong>17:30</strong> — Chiudi ticket risolti, aggiorna canned responses se emergono pattern</li>
+</ol>
+
+<h3>CEO / Management</h3>
+<ol>
+  <li><strong>09:00</strong> — Dashboard overview</li>
+  <li><strong>10:00</strong> — Approva change requests pending</li>
+  <li><strong>Settimanale</strong> — Report sales + delivery + financial per il board</li>
+</ol>
+
+<hr>
+
+<div class="box box-tip">
+  <h4>📞 Supporto interno</h4>
+  <p>Per problemi tecnici o richieste di configurazione sul CRM, contatta il <strong>team IT interno</strong> o apri un ticket interno categorizzato "CRM".</p>
+</div>
+
+<div class="footer-note">
+  CRM Connecteed — Guida Operativa v1.0<br>
+  © 2026 Connecteed Srl · Tutti i diritti riservati
+</div>
+
+</body>
+</html>
