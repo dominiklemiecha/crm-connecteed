@@ -57,7 +57,7 @@ import { OutlookModule } from './modules/outlook/outlook.module';
           password: config.get('DB_PASSWORD', 'connecteed_secret'),
           database: config.get<string>('DB_DATABASE', 'crm_connecteed'),
           autoLoadEntities: true,
-          synchronize: envConfig.syncDatabase || config.get('FORCE_DB_SYNC') === 'true',
+          synchronize: envConfig.syncDatabase || process.env.FORCE_DB_SYNC === 'true',
           logging: envConfig.logging,
         };
       },
