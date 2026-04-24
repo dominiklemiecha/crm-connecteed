@@ -2,6 +2,7 @@ import { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Eye, EyeOff, LogIn } from 'lucide-react';
+import logoUrl from '../assets/logo-connecteed.svg';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ export default function LoginPage() {
         {/* Logo */}
         <div className="flex flex-col items-center mb-10">
           <img
-            src="/src/assets/logo-BebI3mm7.svg"
+            src={logoUrl}
             alt="Connecteed"
             className="h-10 mb-6"
           />

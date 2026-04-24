@@ -1,6 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
+import logoUrl from '../../assets/logo-connecteed.svg';
 
 export default function PortalLoginPage() {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ export default function PortalLoginPage() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <img src="/src/assets/logo-BebI3mm7.svg" alt="Connecteed" className="h-8 mx-auto mb-4" />
+          <img src={logoUrl} alt="Connecteed" className="h-8 mx-auto mb-4" />
           <h1 className="text-xl font-bold text-white">Portale Cliente</h1>
           <p className="text-blue-200 text-sm mt-1">Area Riservata</p>
         </div>
