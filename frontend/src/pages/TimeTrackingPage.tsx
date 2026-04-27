@@ -321,19 +321,19 @@ export default function TimeTrackingPage() {
   ];
 
   return (
-    <div className="p-6 space-y-6 max-w-7xl mx-auto">
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 max-w-7xl mx-auto">
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Ore Lavorate</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Ore Lavorate</h1>
           <p className="text-sm text-gray-500 mt-1">Tracciamento del tempo per progetto</p>
         </div>
         <div className="flex items-center gap-3 flex-wrap">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <label className="text-sm text-gray-600">Dal</label>
             <input type="date" value={dateFrom} onChange={(e) => setDateFrom(e.target.value)}
               className="px-3 py-1.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <label className="text-sm text-gray-600">Al</label>
             <input type="date" value={dateTo} onChange={(e) => setDateTo(e.target.value)}
               className="px-3 py-1.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
@@ -404,7 +404,7 @@ export default function TimeTrackingPage() {
 
           {selectedProject && !projectSummaryLoading && projectSummary && (
             <>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
                   <p className="text-sm font-medium text-blue-700 opacity-80">Ore Registrate</p>
                   <p className="text-3xl font-bold text-blue-700 mt-1">{projectSummary.totalHours}h</p>
@@ -481,7 +481,7 @@ export default function TimeTrackingPage() {
               {tasks.map((t) => <option key={t.id} value={t.id}>{t.title}</option>)}
             </select>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Data *</label>
               <input type="date" value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} className={inputCls} />

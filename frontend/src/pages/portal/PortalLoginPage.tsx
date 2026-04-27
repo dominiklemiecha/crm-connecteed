@@ -40,7 +40,7 @@ export default function PortalLoginPage() {
         </div>
 
         {/* Card */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8">
+        <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8">
           <h2 className="text-lg font-semibold text-gray-900 mb-6">Accedi al tuo portale</h2>
 
           {error && (

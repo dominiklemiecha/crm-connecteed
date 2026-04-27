@@ -237,7 +237,7 @@ export default function DepartmentsPage() {
       label: 'Nome',
       sortable: true,
       render: (v) => (
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
             <Layers className="w-4 h-4 text-indigo-600" />
           </div>
@@ -277,16 +277,16 @@ export default function DepartmentsPage() {
   ];
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="p-4 sm:p-6 max-w-7xl mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
             <Layers className="w-6 h-6 text-indigo-600" />
             Reparti
           </h1>
           <p className="text-sm text-gray-500">Gestione reparti e team interni</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => fetchDepartments(page, search)}
             className="flex items-center gap-2 px-3 py-2 text-sm bg-gray-100 rounded-lg hover:bg-gray-200 text-gray-600"

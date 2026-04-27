@@ -211,7 +211,7 @@ function CreateInvoiceModal({
       <div className="space-y-4">
         {error && <p className="text-sm text-red-600 bg-red-50 px-3 py-2 rounded-lg">{error}</p>}
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Tipo *</label>
             <select value={form.type} onChange={(e) => setForm((f) => ({ ...f, type: e.target.value }))}
@@ -392,7 +392,7 @@ function InvoiceDetailModal({
       ) : (
         <div className="space-y-5">
           {/* Header info */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div><p className="text-xs text-gray-500">Numero</p><p className="font-semibold">{detail.invoiceNumber}</p></div>
             <div><p className="text-xs text-gray-500">Tipo</p><StatusBadge status={detail.type} /></div>
             <div><p className="text-xs text-gray-500">Stato</p><StatusBadge status={detail.status} /></div>
@@ -768,16 +768,16 @@ export default function InvoicesPage() {
   ];
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="p-4 sm:p-6 max-w-7xl mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
             <Receipt className="w-6 h-6 text-blue-600" />
             Fatture
           </h1>
           <p className="text-sm text-gray-500">Fatturazione e scadenziario pagamenti</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <button onClick={() => fetchInvoices(page, search)}
             className="flex items-center gap-2 px-3 py-2 text-sm bg-gray-100 rounded-lg hover:bg-gray-200 text-gray-600">
             <RefreshCw className="w-4 h-4" />

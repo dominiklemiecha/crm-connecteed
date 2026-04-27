@@ -199,7 +199,7 @@ function EditProjectModal({
           <textarea value={form.description} onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
             rows={3} className={inputClass} />
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Project Manager</label>
             <select value={form.pmId} onChange={(e) => setForm((f) => ({ ...f, pmId: e.target.value }))} className={selectClass}>
@@ -214,7 +214,7 @@ function EditProjectModal({
             </select>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Data inizio</label>
             <input type="date" value={form.startDate} onChange={(e) => setForm((f) => ({ ...f, startDate: e.target.value }))}
@@ -322,7 +322,7 @@ function TaskModal({
             {departments.map((d) => <option key={d.id} value={d.name}>{d.name}</option>)}
           </select>
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Data inizio</label>
             <input type="date" value={form.startDatePlanned} onChange={(e) => setForm((f) => ({ ...f, startDatePlanned: e.target.value }))}
@@ -334,7 +334,7 @@ function TaskModal({
               className={inputClass} />
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <input type="checkbox" id="taskMilestone" checked={form.isMilestone}
             onChange={(e) => setForm((f) => ({ ...f, isMilestone: e.target.checked }))}
             className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
@@ -378,7 +378,7 @@ function TaskRow({
   return (
     <tr className="border-b border-gray-100 last:border-0 hover:bg-gray-50">
       <td className="px-4 py-3">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {task.isMilestone && <span title="Milestone"><Flag className="w-4 h-4 text-amber-500 flex-shrink-0" /></span>}
           <span className="font-medium text-gray-800">{task.name}</span>
         </div>
@@ -390,7 +390,7 @@ function TaskRow({
       <td className="px-4 py-3 text-sm text-gray-500">{fmtDate(task.startDatePlanned)}</td>
       <td className="px-4 py-3 text-sm text-gray-500">{fmtDate(task.endDatePlanned)}</td>
       <td className="px-4 py-3 w-44">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <input
             type="range" min={0} max={100} value={localPct}
             onChange={(e) => setLocalPct(Number(e.target.value))}
@@ -589,7 +589,7 @@ export default function ProjectDetailPage() {
 
   if (loadingProject) {
     return (
-      <div className="p-6 max-w-7xl mx-auto">
+      <div className="p-4 sm:p-6 max-w-7xl mx-auto">
         <div className="animate-pulse space-y-4">
           <div className="h-8 bg-gray-200 rounded w-48" />
           <div className="h-4 bg-gray-200 rounded w-32" />
@@ -601,7 +601,7 @@ export default function ProjectDetailPage() {
 
   if (!project) {
     return (
-      <div className="p-6 max-w-7xl mx-auto text-center py-20">
+      <div className="p-4 sm:p-6 max-w-7xl mx-auto text-center py-20">
         <p className="text-gray-500">Progetto non trovato.</p>
         <button onClick={() => navigate('/projects')} className="mt-4 text-blue-600 hover:underline text-sm">
           ← Torna ai progetti
@@ -611,7 +611,7 @@ export default function ProjectDetailPage() {
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="p-4 sm:p-6 max-w-7xl mx-auto">
       {/* Back + Header */}
       <div className="mb-6">
         <button
@@ -622,18 +622,18 @@ export default function ProjectDetailPage() {
           Tutti i progetti
         </button>
 
-        <div className="flex items-start justify-between">
-          <div>
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+          <div className="min-w-0">
             <p className="text-xs text-gray-400 font-mono">{project.projectNumber}</p>
-            <h1 className="text-2xl font-bold text-gray-900 mt-1">{project.name}</h1>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mt-1 break-words">{project.name}</h1>
             {project.company && (
-              <p className="text-sm text-gray-500 mt-1 flex items-center gap-1">
-                <Building2 className="w-4 h-4" />
-                {project.company.name}
+              <p className="text-sm text-gray-500 mt-1 flex items-center gap-1 truncate">
+                <Building2 className="w-4 h-4 flex-shrink-0" />
+                <span className="truncate">{project.company.name}</span>
               </p>
             )}
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <StatusBadge status={project.status} />
             <button
               onClick={() => setShowEditProject(true)}
@@ -758,8 +758,8 @@ export default function ProjectDetailPage() {
       />
 
       {/* Tabs */}
-      <div className="border-b border-gray-200 mb-6">
-        <nav className="flex gap-1">
+      <div className="border-b border-gray-200 mb-4 sm:mb-6 -mx-4 px-4 sm:mx-0 sm:px-0 overflow-x-auto scrollbar-hide">
+        <nav className="flex gap-1 min-w-max">
           {(['overview', 'tasks', 'documents'] as Tab[]).map((tab) => {
             const labels: Record<Tab, string> = { overview: 'Overview', tasks: 'Task / Gantt', documents: 'Documenti' };
             return (
@@ -920,7 +920,7 @@ export default function ProjectDetailPage() {
 
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-semibold text-gray-900">Task e Gantt</h2>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               {tasks.length > 0 && (
                 <>
                   <button

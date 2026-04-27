@@ -112,13 +112,13 @@ export default function PortalFilesPage() {
   );
 
   return (
-    <div className="p-6 space-y-6 max-w-5xl mx-auto">
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 max-w-5xl mx-auto">
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Documenti</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Documenti</h1>
           <p className="text-sm text-gray-500 mt-1">Documenti condivisi con te da Connecteed</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <button
             onClick={() => { setShowUpload(!showUpload); setUploadError(''); setUploadSuccess(''); }}
             className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-xl hover:bg-blue-700 transition-colors"
@@ -209,7 +209,7 @@ export default function PortalFilesPage() {
               {filtered.map((file) => (
                 <tr key={file.id} className="border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors">
                   <td className="px-4 py-3">
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-wrap items-center gap-3">
                       <div className="w-9 h-9 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <FileIcon mimeType={file.mimeType} />
                       </div>

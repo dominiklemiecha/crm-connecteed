@@ -206,7 +206,7 @@ export default function CompanyDetailPage() {
   };
 
   if (loading) return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="p-4 sm:p-6 max-w-7xl mx-auto">
       <div className="animate-pulse space-y-4">
         <div className="h-8 bg-gray-200 rounded w-1/3" />
         <div className="h-48 bg-gray-200 rounded-2xl" />
@@ -215,7 +215,7 @@ export default function CompanyDetailPage() {
   );
 
   if (!company) return (
-    <div className="p-6 text-center text-gray-500">Azienda non trovata.</div>
+    <div className="p-4 sm:p-6 text-center text-gray-500">Azienda non trovata.</div>
   );
 
   const TAB_LABELS: Record<TabId, string> = {
@@ -227,7 +227,7 @@ export default function CompanyDetailPage() {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
+    <div className="p-4 sm:p-6 max-w-7xl mx-auto space-y-4 sm:space-y-6">
       {/* Back + Header */}
       <div className="flex items-center gap-4">
         <button onClick={() => navigate('/companies')} className="text-gray-400 hover:text-gray-600 transition-colors">
@@ -518,7 +518,7 @@ export default function CompanyDetailPage() {
         }
       >
         {contactError && <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">{contactError}</div>}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[
             { key: 'firstName', label: 'Nome *', type: 'text' },
             { key: 'lastName', label: 'Cognome *', type: 'text' },

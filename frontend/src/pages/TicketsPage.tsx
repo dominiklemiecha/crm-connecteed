@@ -302,18 +302,18 @@ export default function TicketsPage() {
   ];
 
   return (
-    <div className="p-6 space-y-6 max-w-7xl mx-auto">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-            <Ticket className="w-6 h-6 text-orange-600" />
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 max-w-7xl mx-auto">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
+            <Ticket className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600 flex-shrink-0" />
             Ticket
           </h1>
-          <p className="text-sm text-gray-500 mt-1">{total} ticket nel sistema</p>
+          <p className="text-xs sm:text-sm text-gray-500 mt-1">{total} ticket nel sistema</p>
         </div>
         <button
           onClick={() => { setForm(emptyForm); setFormError(''); setNewModal(true); }}
-          className="flex items-center gap-2 px-4 py-2 bg-orange-600 text-white rounded-xl text-sm font-medium hover:bg-orange-700"
+          className="flex items-center justify-center gap-2 px-4 py-2 bg-orange-600 text-white rounded-xl text-sm font-medium hover:bg-orange-700 w-full sm:w-auto"
         >
           <Plus className="w-4 h-4" />
           Nuovo Ticket
@@ -321,7 +321,7 @@ export default function TicketsPage() {
       </div>
 
       {/* Filters */}
-      <div className="flex gap-3 flex-wrap">
+      <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3">
         <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}
           className="px-3 py-2 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-orange-500">
           <option value="">Tutti gli stati</option>
@@ -357,7 +357,7 @@ export default function TicketsPage() {
 
       {/* Ticket Detail Sidebar */}
       {selectedTicket && (
-        <div className="fixed inset-y-0 right-0 w-[480px] bg-white shadow-2xl border-l border-gray-200 z-40 flex flex-col">
+        <div className="fixed inset-0 sm:inset-y-0 sm:right-0 sm:left-auto sm:w-[480px] bg-white shadow-2xl sm:border-l border-gray-200 z-40 flex flex-col">
           <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
             <div>
               <p className="text-xs text-gray-400 font-mono">{selectedTicket.ticketNumber}</p>
@@ -389,7 +389,7 @@ export default function TicketsPage() {
 
           {/* Status change */}
           <div className="px-6 py-3 border-b border-gray-100">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="text-xs text-gray-500">Cambia stato:</span>
               {(['open', 'in_progress', 'waiting', 'closed'] as TicketStatus[]).map((s) => (
                 <button
@@ -420,7 +420,7 @@ export default function TicketsPage() {
                 className={`rounded-xl p-4 ${msg.isInternal ? 'bg-amber-50 border border-amber-200' : msg.authorType === 'customer' || msg.authorType === 'client' ? 'bg-blue-50 border border-blue-200' : 'bg-white border border-gray-200'}`}
               >
                 <div className="flex items-center justify-between mb-1">
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <span className={`inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium ${
                       msg.authorType === 'customer' || msg.authorType === 'client'
                         ? 'bg-blue-100 text-blue-700'
@@ -445,7 +445,7 @@ export default function TicketsPage() {
           {/* Reply */}
           <div className="border-t border-gray-100 p-4 space-y-3">
             {/* Canned responses dropdown */}
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <div className="relative" ref={cannedDropdownRef}>
                 <button
                   onClick={() => setCannedDropdownOpen(!cannedDropdownOpen)}
@@ -541,7 +541,7 @@ export default function TicketsPage() {
             <textarea rows={4} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })}
               className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none" />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Priorità</label>
               <select value={form.priority} onChange={(e) => setForm({ ...form, priority: e.target.value as TicketPriority })}
@@ -597,7 +597,7 @@ export default function TicketsPage() {
             <p className="text-sm font-medium text-gray-700">
               {editingCannedId ? 'Modifica risposta' : 'Nuova risposta predefinita'}
             </p>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-medium text-gray-600 mb-1">Titolo *</label>
                 <input type="text" value={cannedForm.title} onChange={(e) => setCannedForm({ ...cannedForm, title: e.target.value })}
@@ -615,7 +615,7 @@ export default function TicketsPage() {
               <textarea rows={3} value={cannedForm.content} onChange={(e) => setCannedForm({ ...cannedForm, content: e.target.value })}
                 className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none" />
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <button onClick={handleSaveCanned} disabled={cannedSaving || !cannedForm.title.trim() || !cannedForm.content.trim()}
                 className="px-4 py-2 text-sm bg-orange-600 text-white rounded-xl font-medium hover:bg-orange-700 disabled:bg-orange-400">
                 {cannedSaving ? 'Salvataggio...' : editingCannedId ? 'Aggiorna' : 'Aggiungi'}
@@ -637,7 +637,7 @@ export default function TicketsPage() {
               cannedResponses.map((cr) => (
                 <div key={cr.id} className="flex items-start justify-between p-3 bg-white border border-gray-200 rounded-xl">
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
                       <p className="text-sm font-medium text-gray-800">{cr.title}</p>
                       {cr.category && (
                         <span className="text-xs bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded">{cr.category}</span>

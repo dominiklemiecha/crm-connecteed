@@ -29,7 +29,7 @@ function KPICard({ label, value, sub, color = 'blue' }: { label: string; value: 
   return (
     <div className={`rounded-xl border p-5 ${colors[color] ?? colors.blue}`}>
       <p className="text-sm font-medium opacity-80">{label}</p>
-      <p className="text-2xl font-bold mt-1">{value}</p>
+      <p className="text-xl sm:text-2xl font-bold mt-1">{value}</p>
       {sub && <p className="text-xs mt-1 opacity-60">{sub}</p>}
     </div>
   );
@@ -37,7 +37,7 @@ function KPICard({ label, value, sub, color = 'blue' }: { label: string; value: 
 
 function ChartCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6">
+    <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
       <h3 className="text-sm font-semibold text-gray-700 mb-4">{title}</h3>
       {children}
     </div>
@@ -347,14 +347,14 @@ export default function ReportsPage() {
   const tabProps = { dateFrom, dateTo };
 
   return (
-    <div className="p-6 space-y-6 max-w-7xl mx-auto">
-      <div className="flex items-center justify-between flex-wrap gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Report</h1>
-          <p className="text-sm text-gray-500 mt-1">Analisi e KPI operativi</p>
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 max-w-7xl mx-auto">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 lg:gap-4">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Report</h1>
+          <p className="text-xs sm:text-sm text-gray-500 mt-1">Analisi e KPI operativi</p>
         </div>
-        <div className="flex items-center gap-3 flex-wrap">
-          <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <div className="flex flex-wrap items-center gap-2">
             <label className="text-sm text-gray-600">Dal</label>
             <input
               type="date"
@@ -363,7 +363,7 @@ export default function ReportsPage() {
               className="px-3 py-1.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <label className="text-sm text-gray-600">Al</label>
             <input
               type="date"
@@ -392,8 +392,8 @@ export default function ReportsPage() {
       </div>
 
       {/* Tab navigation */}
-      <div className="border-b border-gray-200">
-        <nav className="flex gap-1">
+      <div className="border-b border-gray-200 -mx-4 px-4 sm:mx-0 sm:px-0 overflow-x-auto scrollbar-hide">
+        <nav className="flex gap-1 min-w-max">
           {TABS.map((tab) => (
             <button
               key={tab.id}

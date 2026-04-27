@@ -74,11 +74,11 @@ export default function NotificationsPage() {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
+    <div className="p-4 sm:p-6 max-w-7xl mx-auto space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-3">
             <Bell className="w-6 h-6 text-blue-600" />
             Notifiche
             {unreadCount > 0 && (
@@ -92,7 +92,7 @@ export default function NotificationsPage() {
         <button
           onClick={markAllRead}
           disabled={markingAll || unreadCount === 0}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-xl text-sm font-medium hover:bg-blue-700 disabled:bg-gray-200 disabled:text-gray-400 transition-colors"
+          className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-xl text-sm font-medium hover:bg-blue-700 disabled:bg-gray-200 disabled:text-gray-400 transition-colors w-full sm:w-auto"
         >
           <CheckCheck className="w-4 h-4" />
           {markingAll ? 'Aggiornamento...' : 'Segna tutte come lette'}

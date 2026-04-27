@@ -112,10 +112,10 @@ export default function AuditLogPage() {
   };
 
   return (
-    <div className="p-6 space-y-6 max-w-7xl mx-auto">
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 max-w-7xl mx-auto">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
           <Shield className="w-6 h-6 text-slate-600" />
           Registro Attività
         </h1>
@@ -246,7 +246,7 @@ export default function AuditLogPage() {
             <p className="text-xs text-gray-500">
               {((page - 1) * PAGE_SIZE) + 1}–{Math.min(page * PAGE_SIZE, total)} di {total} voci
             </p>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}

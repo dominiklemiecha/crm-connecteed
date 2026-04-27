@@ -148,10 +148,10 @@ export default function TemplatesPage() {
   // ─── EDITOR VIEW ───────────────────────────────────────────────────────────
   if (editing) {
     return (
-      <div className="p-6 max-w-7xl mx-auto space-y-4">
+      <div className="p-4 sm:p-6 max-w-7xl mx-auto space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <button onClick={() => setEditing(null)} className="text-gray-400 hover:text-gray-600">
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -159,7 +159,7 @@ export default function TemplatesPage() {
               {editing.id ? 'Modifica Template' : 'Nuovo Template'}
             </h1>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <button onClick={handlePreview} className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-xl text-sm text-gray-700 hover:bg-gray-50">
               <Eye className="w-4 h-4" /> Anteprima
             </button>
@@ -262,10 +262,10 @@ export default function TemplatesPage() {
 
   // ─── LIST VIEW ─────────────────────────────────────────────────────────────
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-5">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+    <div className="p-4 sm:p-6 max-w-7xl mx-auto space-y-4 sm:space-y-5">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
             <FileText className="w-6 h-6 text-blue-600" />
             Template Documenti
           </h1>
@@ -309,7 +309,7 @@ export default function TemplatesPage() {
                 <FileText className="w-5 h-5 text-blue-600" />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <h3 className="font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">{tpl.name}</h3>
                   {tpl.isDefault && <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-medium">Default</span>}
                 </div>

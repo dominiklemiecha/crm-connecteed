@@ -38,20 +38,20 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex flex-col items-center justify-center p-4" style={{ minHeight: '125vh' }}>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex flex-col items-center justify-center p-4 py-8">
       <div className="w-full max-w-sm">
         {/* Logo */}
-        <div className="flex flex-col items-center mb-10">
+        <div className="flex flex-col items-center mb-6 sm:mb-10">
           <img
             src={logoUrl}
             alt="Connecteed"
-            className="h-10 mb-6"
+            className="h-8 sm:h-10 mb-4 sm:mb-6"
           />
-          <p className="text-slate-400 text-sm">Gestionale integrato vendita e delivery</p>
+          <p className="text-slate-400 text-xs sm:text-sm text-center px-2">Gestionale integrato vendita e delivery</p>
         </div>
 
         {/* Card */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8">
+        <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8">
           <h2 className="text-lg font-semibold text-gray-900 mb-6">Accedi al tuo account</h2>
 
           {error && (

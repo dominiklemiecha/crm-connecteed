@@ -65,16 +65,16 @@ export default function PortalDashboard() {
 
   if (loading) {
     return (
-      <div className="p-6 flex items-center justify-center h-64">
+      <div className="p-4 sm:p-6 flex items-center justify-center h-64">
         <div className="text-gray-400 animate-pulse">Caricamento...</div>
       </div>
     );
   }
 
   return (
-    <div className="p-6 space-y-6 max-w-5xl mx-auto">
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 max-w-5xl mx-auto">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Benvenuto nel tuo Portale</h1>
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Benvenuto nel tuo Portale</h1>
         <p className="text-sm text-gray-500 mt-1">Monitora i tuoi progetti, preventivi e richieste di supporto.</p>
       </div>
 
@@ -85,35 +85,35 @@ export default function PortalDashboard() {
       {/* KPI cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <a href="/portal/projects" className="bg-blue-50 border border-blue-200 rounded-xl p-5 hover:bg-blue-100 transition-colors">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
               <FolderOpen className="w-5 h-5 text-blue-600" />
             </div>
             <div>
               <p className="text-sm text-blue-700 font-medium">Progetti Attivi</p>
-              <p className="text-2xl font-bold text-blue-800">{data?.projects.length ?? 0}</p>
+              <p className="text-xl sm:text-2xl font-bold text-blue-800">{data?.projects.length ?? 0}</p>
             </div>
           </div>
         </a>
         <a href="/portal/tickets" className="bg-orange-50 border border-orange-200 rounded-xl p-5 hover:bg-orange-100 transition-colors">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
               <Ticket className="w-5 h-5 text-orange-600" />
             </div>
             <div>
               <p className="text-sm text-orange-700 font-medium">Ticket Aperti</p>
-              <p className="text-2xl font-bold text-orange-800">{data?.openTickets ?? 0}</p>
+              <p className="text-xl sm:text-2xl font-bold text-orange-800">{data?.openTickets ?? 0}</p>
             </div>
           </div>
         </a>
         <a href="/portal/quotes" className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 hover:bg-emerald-100 transition-colors">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center">
               <FileText className="w-5 h-5 text-emerald-600" />
             </div>
             <div>
               <p className="text-sm text-emerald-700 font-medium">Preventivi in Attesa</p>
-              <p className="text-2xl font-bold text-emerald-800">{data?.pendingQuotes ?? 0}</p>
+              <p className="text-xl sm:text-2xl font-bold text-emerald-800">{data?.pendingQuotes ?? 0}</p>
             </div>
           </div>
         </a>
@@ -152,7 +152,7 @@ export default function PortalDashboard() {
       {(data?.documentRequests?.length ?? 0) > 0 && (
         <div className="bg-white rounded-xl border border-gray-200 p-6">
           <div className="flex items-center justify-between mb-5">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <AlertTriangle className="w-5 h-5 text-amber-500" />
               <h2 className="text-lg font-semibold text-gray-900">Documenti da Caricare</h2>
             </div>

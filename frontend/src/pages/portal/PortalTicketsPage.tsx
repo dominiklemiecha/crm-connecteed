@@ -119,7 +119,7 @@ export default function PortalTicketsPage() {
 
   if (selectedTicket) {
     return (
-      <div className="p-6 space-y-4 max-w-3xl mx-auto flex flex-col" style={{ height: 'calc(100vh - 56px)' }}>
+      <div className="p-4 sm:p-6 space-y-4 max-w-3xl mx-auto flex flex-col h-[calc(100dvh-56px)]">
         <button
           onClick={() => setSelectedTicket(null)}
           className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 self-start"
@@ -133,7 +133,7 @@ export default function PortalTicketsPage() {
             <h2 className="font-semibold text-gray-900">{selectedTicket.subject}</h2>
             <p className="text-xs text-gray-400 mt-0.5">Aperto il {fmt(selectedTicket.createdAt)}</p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <StatusBadge status={selectedTicket.priority} />
             <StatusBadge status={selectedTicket.status} />
           </div>
@@ -190,10 +190,10 @@ export default function PortalTicketsPage() {
   }
 
   return (
-    <div className="p-6 space-y-6 max-w-5xl mx-auto">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Ticket di Supporto</h1>
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 max-w-5xl mx-auto">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Ticket di Supporto</h1>
           <p className="text-sm text-gray-500 mt-1">Apri e gestisci le tue richieste di supporto</p>
         </div>
         <button
@@ -221,7 +221,7 @@ export default function PortalTicketsPage() {
             >
               <div className="flex items-center justify-between flex-wrap gap-2">
                 <h3 className="font-medium text-gray-900">{ticket.subject}</h3>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <StatusBadge status={ticket.priority} />
                   <StatusBadge status={ticket.status} />
                 </div>

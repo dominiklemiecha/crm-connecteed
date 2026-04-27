@@ -115,14 +115,14 @@ export default function ApprovalsPage() {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
+    <div className="p-4 sm:p-6 max-w-7xl mx-auto space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Approvazioni CEO</h1>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Approvazioni CEO</h1>
           <p className="text-sm text-gray-500 mt-1">Gestione approvazioni preventivi e contratti</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           {pendingCount > 0 && (
             <span className="bg-amber-100 text-amber-800 text-sm font-bold px-3 py-1 rounded-full flex items-center gap-1.5">
               <Clock className="w-4 h-4" />

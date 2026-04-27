@@ -252,10 +252,10 @@ export default function QuotesPage() {
   const STATUSES = ['draft', 'pending_approval', 'approved', 'sent', 'rejected', 'cancelled'];
 
   return (
-    <div className="p-6 space-y-6 max-w-7xl mx-auto">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 max-w-7xl mx-auto">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
             <FileText className="w-6 h-6 text-violet-600" />
             Preventivi
           </h1>
@@ -493,7 +493,7 @@ export default function QuotesPage() {
               ))}
             </div>
             <div className="flex justify-end mt-3 pt-3 border-t border-gray-200">
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <Euro className="w-4 h-4 text-gray-500" />
                 <span className="text-sm font-bold text-gray-900">Totale: {formatEur(totalItems)}</span>
               </div>

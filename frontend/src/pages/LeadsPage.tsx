@@ -226,19 +226,19 @@ export default function LeadsPage() {
   });
 
   return (
-    <div className="p-6 space-y-5 max-w-7xl mx-auto">
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-5 max-w-7xl mx-auto">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-            <Target className="w-6 h-6 text-blue-600" />
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
+            <Target className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0" />
             Lead Pipeline
           </h1>
-          <p className="text-sm text-gray-500 mt-1">{leads.length} lead totali{statusFilter ? ` · Filtro: ${COLUMNS.find(c => c.id === statusFilter)?.label}` : ''}</p>
+          <p className="text-xs sm:text-sm text-gray-500 mt-1">{leads.length} lead totali{statusFilter ? ` · Filtro: ${COLUMNS.find(c => c.id === statusFilter)?.label}` : ''}</p>
         </div>
         <button
           onClick={() => { setForm(emptyForm); setFormError(''); setSelectedProductId(''); setNewModal(true); }}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-xl text-sm font-medium hover:bg-blue-700 transition-colors"
+          className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-xl text-sm font-medium hover:bg-blue-700 transition-colors w-full sm:w-auto"
         >
           <Plus className="w-4 h-4" />
           Nuovo Lead
@@ -253,7 +253,7 @@ export default function LeadsPage() {
       )}
 
       {/* Pipeline Summary Cards */}
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {pipelineCards.map((card) => {
           const borderColors: Record<string, string> = { new: 'border-l-blue-500', qualifying: 'border-l-amber-500', qualified: 'border-l-emerald-500', unqualified: 'border-l-gray-400' };
           const isActive = statusFilter === card.id;
@@ -264,7 +264,7 @@ export default function LeadsPage() {
               className={`bg-white rounded-xl border border-gray-200 border-l-4 ${borderColors[card.id]} p-4 text-left transition-all hover:shadow-md ${isActive ? 'ring-2 ring-blue-500 shadow-md' : ''}`}
             >
               <p className="text-xs text-gray-500 font-medium">{card.label}</p>
-              <p className="text-2xl font-bold text-gray-900 mt-1">{card.count}</p>
+              <p className="text-xl sm:text-2xl font-bold text-gray-900 mt-1">{card.count}</p>
               <p className="text-xs text-gray-400 mt-1">{formatEur(card.totalValue) || '€ 0'}</p>
             </button>
           );
@@ -382,7 +382,7 @@ export default function LeadsPage() {
             </button>
           </div>
           <div className="flex-1 overflow-y-auto p-6 space-y-4">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <StatusBadge status={selectedLead.status} />
             </div>
 
@@ -413,7 +413,7 @@ export default function LeadsPage() {
             <div>
               <p className="text-xs text-gray-400 font-medium mb-2">Cambia Stato</p>
               {VALID_TRANSITIONS[selectedLead.status]?.length > 0 ? (
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {VALID_TRANSITIONS[selectedLead.status].map((targetStatus) => {
                     const col = COLUMNS.find((c) => c.id === targetStatus);
                     if (!col) return null;

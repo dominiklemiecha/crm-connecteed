@@ -369,7 +369,7 @@ function ProjectDetail({ project, onBack }: { project: PortalProject; onBack: ()
                     {tasks.map((task) => (
                       <tr key={task.id} className="hover:bg-gray-50">
                         <td className="py-3 pr-4">
-                          <div className="flex items-center gap-2">
+                          <div className="flex flex-wrap items-center gap-2">
                             {task.isMilestone && <Star className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />}
                             <span className={`font-medium text-gray-900 ${task.isMilestone ? 'text-amber-700' : ''}`}>
                               {task.name}
@@ -446,16 +446,16 @@ export default function PortalProjectsPage() {
 
   if (selectedProject) {
     return (
-      <div className="p-6 max-w-5xl mx-auto">
+      <div className="p-4 sm:p-6 max-w-5xl mx-auto">
         <ProjectDetail project={selectedProject} onBack={() => setSelectedProject(null)} />
       </div>
     );
   }
 
   return (
-    <div className="p-6 space-y-6 max-w-5xl mx-auto">
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 max-w-5xl mx-auto">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">I miei Progetti</h1>
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900">I miei Progetti</h1>
         <p className="text-sm text-gray-500 mt-1">Stato e avanzamento dei tuoi progetti</p>
       </div>
 

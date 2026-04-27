@@ -250,7 +250,7 @@ function ContractDetailModal({
       ) : (
         <div className="space-y-6">
           {/* Info */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <p className="text-xs text-gray-500">Numero</p>
               <p className="font-semibold text-gray-900">{detail.contractNumber}</p>
@@ -482,16 +482,16 @@ export default function ContractsPage() {
   ];
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="p-4 sm:p-6 max-w-7xl mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
             <FileSignature className="w-6 h-6 text-blue-600" />
             Contratti
           </h1>
           <p className="text-sm text-gray-500">Gestione contratti con workflow firma</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => fetchContracts(page, search)}
             className="flex items-center gap-2 px-3 py-2 text-sm bg-gray-100 rounded-lg hover:bg-gray-200 text-gray-600"

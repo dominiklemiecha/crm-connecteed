@@ -246,7 +246,7 @@ export default function UsersPage() {
     {
       key: 'firstName', label: 'Nome', sortable: true,
       render: (_, row) => (
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
             <UserCircle2 className="w-4 h-4 text-blue-600" />
           </div>
@@ -307,10 +307,10 @@ export default function UsersPage() {
   ];
 
   return (
-    <div className="p-6 space-y-6 max-w-7xl mx-auto">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Utenti</h1>
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 max-w-7xl mx-auto">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Utenti</h1>
           <p className="text-sm text-gray-500 mt-1">{total} utenti nel sistema</p>
         </div>
       </div>

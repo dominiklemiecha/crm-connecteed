@@ -227,7 +227,7 @@ export default function CompaniesPage() {
     {
       key: 'name', label: 'Azienda', sortable: true,
       render: (_, row) => (
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
             <Building2 className="w-4 h-4 text-blue-600" />
           </div>
@@ -268,10 +268,10 @@ export default function CompaniesPage() {
   ];
 
   return (
-    <div className="p-6 space-y-6 max-w-7xl mx-auto">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Aziende</h1>
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 max-w-7xl mx-auto">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Aziende</h1>
           <p className="text-sm text-gray-500 mt-1">{total} aziende nel sistema</p>
         </div>
       </div>
@@ -292,7 +292,7 @@ export default function CompaniesPage() {
         searchValue={search}
         onRowClick={(row) => navigate(`/companies/${row.id}`)}
         actions={
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={() => { setImportModalOpen(true); setImportResult(null); setImportError(''); }}
               className="flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-xl text-sm font-medium hover:bg-emerald-700 transition-colors"
@@ -501,7 +501,7 @@ export default function CompaniesPage() {
         {portalError && <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">{portalError}</div>}
         <div className="space-y-4">
           <p className="text-sm text-gray-600">Crea un utente cliente per il portale di <strong>{portalCompany?.name}</strong>.</p>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Nome *</label>
               <input type="text" value={portalForm.firstName} onChange={(e) => setPortalForm({ ...portalForm, firstName: e.target.value })}

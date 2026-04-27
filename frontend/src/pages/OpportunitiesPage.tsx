@@ -223,24 +223,24 @@ export default function OpportunitiesPage() {
     .reduce((sum, o) => sum + (Number(o.estimatedValueCents) || 0), 0);
 
   return (
-    <div className="p-6 flex flex-col gap-6 h-full max-w-7xl mx-auto">
+    <div className="p-4 sm:p-6 flex flex-col gap-4 sm:gap-6 h-full max-w-7xl mx-auto">
       {/* Header */}
-      <div className="flex items-center justify-between flex-shrink-0">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-            <TrendingUp className="w-6 h-6 text-purple-600" />
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 flex-shrink-0">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
+            <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600 flex-shrink-0" />
             Pipeline Opportunità
           </h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-xs sm:text-sm text-gray-500 mt-1">
             {filteredOpportunities.length !== opportunities.length
               ? `${filteredOpportunities.length} di ${opportunities.length} opportunità`
               : `${opportunities.length} opportunità`}
-            {' '}· Valore pipeline: {formatEur(totalValue)}
+            {' '}· {formatEur(totalValue)}
           </p>
         </div>
         <button
           onClick={() => { setForm(emptyForm); setFormError(''); setNewModal(true); }}
-          className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-xl text-sm font-medium hover:bg-purple-700 transition-colors"
+          className="flex items-center justify-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-xl text-sm font-medium hover:bg-purple-700 transition-colors w-full sm:w-auto"
         >
           <Plus className="w-4 h-4" />
           Nuova Opportunità
