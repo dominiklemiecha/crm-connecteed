@@ -55,15 +55,17 @@ export default function KanbanBoard<T extends { id: string }>({
     setDragOver(null);
   };
 
+  // Mobile: scrollable horizontal with snap. Desktop: grid auto.
   return (
-    <div
-      className={`gap-3 h-full ${columns.length <= 6 ? 'grid' : 'flex overflow-x-auto pb-2'}`}
-      style={columns.length <= 6 ? { gridTemplateColumns: `repeat(${columns.length}, minmax(0, 1fr))` } : undefined}
+    <div className="flex md:grid gap-3 h-full overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none pb-2 -mx-4 px-4 md:mx-0 md:px-0"
+      style={{
+        gridTemplateColumns: columns.length > 0 ? `repeat(${columns.length}, minmax(0, 1fr))` : undefined,
+      }}
     >
       {columns.map((col) => (
         <div
           key={col.id}
-          className={`flex flex-col rounded-xl border-2 transition-colors ${columns.length <= 6 ? 'min-w-0' : 'min-w-[180px] flex-shrink-0'} ${
+          className={`flex flex-col rounded-xl border-2 transition-colors min-w-[280px] md:min-w-0 snap-start flex-shrink-0 md:flex-shrink ${
             dragOver === col.id ? 'border-blue-400 bg-blue-50' : 'border-gray-200 bg-gray-50'
           }`}
           onDragOver={(e) => handleDragOver(e, col.id)}
@@ -80,7 +82,8 @@ export default function KanbanBoard<T extends { id: string }>({
             {onAddCard && (
               <button
                 onClick={() => onAddCard(col.id)}
-                className="p-1 rounded-lg hover:bg-white/40 transition-colors flex-shrink-0"
+                className="p-1.5 rounded-lg hover:bg-white/40 transition-colors flex-shrink-0"
+                aria-label="Aggiungi"
               >
                 <Plus className="w-4 h-4" />
               </button>
@@ -88,7 +91,7 @@ export default function KanbanBoard<T extends { id: string }>({
           </div>
 
           {/* Cards */}
-          <div className="flex-1 p-2.5 space-y-2.5 overflow-y-auto">
+          <div className="flex-1 p-2.5 space-y-2.5 overflow-y-auto min-h-[120px]">
             {col.items.map((item) => (
               <div
                 key={item.id}
@@ -97,7 +100,7 @@ export default function KanbanBoard<T extends { id: string }>({
                 onDragEnd={handleDragEnd}
                 onClick={() => onCardClick?.(item)}
                 className={`cursor-pointer transition-all ${
-                  dragging?.itemId === item.id ? 'opacity-40 scale-95' : 'hover:shadow-md'
+                  dragging?.itemId === item.id ? 'opacity-40 scale-95' : 'hover:shadow-md active:scale-[0.98]'
                 }`}
               >
                 {renderCard(item, col.id)}

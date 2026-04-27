@@ -90,7 +90,7 @@ const STATUS_CONFIG: Record<string, { label: string; classes: string }> = {
 export default function StatusBadge({ status, className = '' }: StatusBadgeProps) {
   const config = STATUS_CONFIG[status] ?? { label: status, classes: 'bg-gray-100 text-gray-600' };
   return (
-    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${config.classes} ${className}`}>
+    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium whitespace-nowrap ${config.classes} ${className}`}>
       {config.label}
     </span>
   );

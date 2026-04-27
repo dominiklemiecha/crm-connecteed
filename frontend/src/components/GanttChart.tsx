@@ -119,16 +119,19 @@ export default function GanttChart({ tasks, projectStart, projectEnd, showBaseli
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 mb-6 overflow-hidden">
-      <div className="px-4 py-3 border-b border-gray-100 flex items-center gap-2">
-        <span className="font-semibold text-gray-800 text-sm">Gantt Chart</span>
-        <span className="text-xs text-gray-400 ml-1">— timeline progetto</span>
-        <div className="ml-auto flex items-center gap-4 text-xs text-gray-500">
-          <span className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded-sm bg-emerald-500" /> Completato</span>
-          <span className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded-sm bg-blue-500" /> In corso</span>
-          <span className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded-sm bg-gray-400" /> Pianificato</span>
-          <span className="flex items-center gap-1"><span className="inline-block w-3 h-3 rotate-45 bg-amber-400" /> Milestone</span>
+      <div className="px-3 sm:px-4 py-2.5 sm:py-3 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center gap-2">
+        <div className="flex items-center gap-2">
+          <span className="font-semibold text-gray-800 text-sm">Gantt Chart</span>
+          <span className="text-xs text-gray-400 hidden sm:inline">— timeline progetto</span>
+          <span className="text-[10px] text-gray-400 sm:hidden ml-auto">scorri →</span>
+        </div>
+        <div className="sm:ml-auto flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] sm:text-xs text-gray-500">
+          <span className="flex items-center gap-1"><span className="inline-block w-2.5 h-2.5 rounded-sm bg-emerald-500" /> Done</span>
+          <span className="flex items-center gap-1"><span className="inline-block w-2.5 h-2.5 rounded-sm bg-blue-500" /> In corso</span>
+          <span className="flex items-center gap-1"><span className="inline-block w-2.5 h-2.5 rounded-sm bg-gray-400" /> Pianif.</span>
+          <span className="flex items-center gap-1"><span className="inline-block w-2.5 h-2.5 rotate-45 bg-amber-400" /> Milestone</span>
           {showBaseline && (
-            <span className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded-sm bg-gray-300 opacity-50" /> Baseline</span>
+            <span className="flex items-center gap-1"><span className="inline-block w-2.5 h-2.5 rounded-sm bg-gray-300 opacity-50" /> Baseline</span>
           )}
         </div>
       </div>
@@ -138,7 +141,7 @@ export default function GanttChart({ tasks, projectStart, projectEnd, showBaseli
           {/* Header row */}
           <div className="flex border-b border-gray-200">
             {/* Task name col */}
-            <div className="w-48 flex-shrink-0 bg-gray-50 border-r border-gray-200 px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+            <div className="w-32 sm:w-48 flex-shrink-0 bg-gray-50 border-r border-gray-200 px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">
               Task
             </div>
             {/* Timeline header */}
@@ -177,7 +180,7 @@ export default function GanttChart({ tasks, projectStart, projectEnd, showBaseli
             return (
               <div key={task.id} className="flex border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors" style={{ height: ROW_HEIGHT }}>
                 {/* Task name */}
-                <div className="w-48 flex-shrink-0 border-r border-gray-200 px-3 flex items-center gap-1.5">
+                <div className="w-32 sm:w-48 flex-shrink-0 border-r border-gray-200 px-3 flex items-center gap-1.5">
                   {task.isMilestone && <Flag className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />}
                   <span className="text-xs text-gray-700 font-medium truncate" title={task.name}>
                     {task.name}

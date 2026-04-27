@@ -2,14 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Zoom 80% — scala tutto ma mantieni altezza piena */
 html {
-  zoom: 0.8;
-  min-height: 125vh; /* compensa: 100/0.8 = 125 */
-}
-
-#root {
-  min-height: 125vh;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -18,7 +13,30 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f8fafc;
-  min-height: 125vh;
+  min-height: 100vh;
+  /* Previene il rubber-band scrolling fastidioso su iOS quando il body è non scrollabile */
+  overscroll-behavior-y: none;
+}
+
+/* Touch targets: min 44px secondo le linee guida iOS/Material */
+@media (max-width: 768px) {
+  button,
+  [role="button"],
+  a {
+    min-height: 36px;
+  }
+  /* Input non zoomano in iOS se font-size >= 16px */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+@media (min-width: 769px) {
+  input[type="text"], input[type="email"], input[type="password"],
+  input[type="number"], input[type="search"], input[type="tel"],
+  input[type="date"], select, textarea {
+    font-size: 14px;
+  }
 }
 
 /* Sidebar scrollbar minimal */
@@ -38,4 +56,13 @@ body {
 .sidebar-scroll {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+/* Hide scrollbar utility (per Kanban orizzontale mobile, ecc.) */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
