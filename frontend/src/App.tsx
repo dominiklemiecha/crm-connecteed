@@ -80,7 +80,7 @@ function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
         />
       )}
       <aside
-        className={`bg-slate-900 text-white flex flex-col w-64 fixed inset-y-0 left-0 z-40 transform transition-transform duration-200 lg:translate-x-0 lg:static lg:z-0 ${
+        className={`bg-slate-900 text-white flex flex-col w-64 fixed inset-y-0 left-0 z-40 transform transition-transform duration-200 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0 lg:z-0 ${
           open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
