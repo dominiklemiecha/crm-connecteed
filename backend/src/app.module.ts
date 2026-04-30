@@ -36,6 +36,7 @@ import { TemplatesModule } from './modules/templates/templates.module';
 import { DocuSignModule } from './modules/docusign/docusign.module';
 import { FattureCloudModule } from './modules/fatture-cloud/fatture-cloud.module';
 import { OutlookModule } from './modules/outlook/outlook.module';
+import { DeliveredProjectsModule } from './modules/delivered-projects/delivered-projects.module';
 
 @Module({
   imports: [
@@ -107,6 +108,7 @@ import { OutlookModule } from './modules/outlook/outlook.module';
     DocuSignModule,
     FattureCloudModule,
     OutlookModule,
+    DeliveredProjectsModule,
   ],
 })
 export class AppModule implements NestModule {

@@ -53,6 +53,7 @@ services:
       FRONTEND_URL: http://localhost:5175
       UPLOAD_DIR: /app/uploads
       MAX_FILE_SIZE_MB: 50
+      APP_ENCRYPTION_KEY: d15c0449d7566b3d3cda423264d26604e56e3d21e977656470d88e8cf6da54c6
     ports:
       - "3000:3000"
     volumes:
