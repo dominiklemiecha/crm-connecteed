@@ -47,6 +47,7 @@ services:
       JWT_EXPIRES_IN: 15m
       JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
       JWT_REFRESH_EXPIRES_IN: 7d
+      APP_ENCRYPTION_KEY: ${APP_ENCRYPTION_KEY}
       APP_PORT: 3000
       APP_ENV: production
       FRONTEND_URL: https://crm.connecteed.com
